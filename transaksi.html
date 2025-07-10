@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Saputra Nokos</title>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Urbanist', sans-serif;
+  background: #0f0c29;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  animation: fadeInUp 1s ease;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+label {
+  margin-top: 16px;
+  display: block;
+  font-weight: bold;
+}
+.input-group {
+  position: relative;
+  margin-top: 8px;
+}
+.input-group i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
+}
+input, select {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  background: #00e676;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.info-box {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 20px;
+  border-left: 4px solid #00e676;
+  border-radius: 10px;
+}
+.info-box a {
+  display: inline-block;
+  margin-top: 14px;
+  background: #25d366;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+.keterangan-kualitas {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: none;
+}
+.keterangan-kualitas.show {
+  display: block;
+  opacity: 1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Saputra Nokos</h2>
+
+  <div class="info-box">
+    <p><strong>Apa itu NOKOS?</strong><br>
+      NOKOS adalah *nomor kosong* atau *nomor virtual* untuk verifikasi akun, tidak terikat pada SIM fisik.</p>
+    <p>💡 Cocok untuk: membuat akun baru, verifikasi layanan tanpa memakai nomor utama.</p>
+  </div>
+
+  <label for="nama">Nama Sesuai Rekening Anda</label>
+  <div class="input-group">
+    <i class="fa-solid fa-user"></i>
+    <input type="text" id="nama" placeholder="Contoh: Budi Santoso">
+  </div>
+
+  <label for="negara">Pilih Negara</label>
+  <div class="input-group">
+    <i class="fa-solid fa-globe"></i>
+    <select id="negara" onchange="tampilkanKualitas()">
+      <option value="id">🇮🇩 Indonesia</option>
+      <option value="us">🇺🇸 Amerika Serikat</option>
+      <option value="jp">🇯🇵 Jepang</option>
+      <option value="can">🇨🇦 Canada</option>
+      <option value="col">🇨🇴 Colombia</option>
+      <option value="ken">🇰🇪 Kenya</option>
+      <option value="rus">🇷🇺 Russia</option>
+      <option value="viet">🇻🇳 Vietnam</option>
+      <option value="mes">🇪🇬 Mesir</option>
+      <option value="bra">🇧🇷 Brazil</option>
+      <option value="thai">🇹🇭 Thailand</option>
+    </select>
+  </div>
+
+  <label for="kualitas">Pilih Kualitas Nomor</label>
+  <div class="input-group">
+    <i class="fa-solid fa-signal"></i>
+    <select id="kualitas" onchange="tampilkanKeteranganKualitas()"></select>
+  </div>
+
+  <div id="keterangan-kualitas" class="keterangan-kualitas">
+    <p id="keterangan-text"></p>
+  </div>
+
+  <label for="pembayaran">Metode Pembayaran</label>
+  <div class="input-group">
+    <i class="fa-solid fa-money-bill-wave"></i>
+    <select id="pembayaran">
+      <option value="">-- Pilih Metode --</option>
+      <option value="gopay">GoPay</option>
+      <option value="dana">DANA</option>
+    </select>
+  </div>
+
+  <label for="nomor">Nomor Rekening Anda</label>
+  <div class="input-group">
+    <i class="fa-solid fa-address-card"></i>
+    <input type="text" id="nomor" placeholder="Contoh: 089876543210">
+  </div>
+
+  <button onclick="bayar()">Bayar Sekarang</button>
+
+  <div id="ringkasan" class="info-box" style="display:none;"></div>
+</div>
+
+<script>
+const hargaNokos = {
+  id: { nama: "Indonesia", kualitas: { biasa: "Rp5.000", premium: "Rp8.000", super: "Rp10.000" } },
+  us: { nama: "Amerika Serikat", kualitas: { biasa: "Rp30.000", premium: "Rp40.000", super: "Rp47.000" } },
+  jp: { nama: "Jepang", kualitas: { biasa: "Rp80.000", premium: "Rp120.000", super: "Rp180.000" } },
+  can: { nama: "Canada", kualitas: { biasa: "Rp25.000", premium: "Rp35.000", super: "Rp45.000" } },
+  col: { nama: "Colombia", kualitas: { biasa: "Rp25.000", premium: "Rp35.000", super: "Rp45.000" } },
+  ken: { nama: "Kenya", kualitas: { biasa: "Rp17.000", premium: "Rp25.000", super: "Rp33.000" } },
+  rus: { nama: "Russia", kualitas: { biasa: "Rp35.000", premium: "Rp50.000", super: "Rp65.000" } },
+  viet: { nama: "Vietnam", kualitas: { biasa: "Rp17.000", premium: "Rp25.000", super: "Rp30.000" } },
+  mes: { nama: "Mesir", kualitas: { biasa: "Rp25.000", premium: "Rp35.000", super: "Rp50.000" } },
+  bra: { nama: "Brazil", kualitas: { biasa: "Rp35.000", premium: "Rp50.000", super: "Rp65.000" } },
+  thai: { nama: "Thailand", kualitas: { biasa: "Rp35.000", premium: "Rp60.000", super: "Rp85.000" } }
+};
+
+const rekening = {
+  gopay: { nama: "IZMET", nomor: "0895335107865" },
+  dana: { nama: "REPIKA", nomor: "085346808546" }
+};
+
+const kualitasDescriptions = {
+  biasa: "⭐ Standar, masa aktif terbatas, cocok untuk percobaan cepat.",
+  premium: "⭐⭐ Lebih stabil, masa aktif lebih lama.",
+  super: "⭐⭐⭐ Kualitas terbaik, paling stabil, masa aktif paling panjang."
+};
+
+function tampilkanKualitas() {
+  const negara = document.getElementById("negara").value;
+  const kualitasSelect = document.getElementById("kualitas");
+  kualitasSelect.innerHTML = "";
+  if (hargaNokos[negara]) {
+    for (let tipe in hargaNokos[negara].kualitas) {
+      let opt = document.createElement("option");
+      opt.value = tipe;
+      opt.text = `${tipe.charAt(0).toUpperCase() + tipe.slice(1)} - ${hargaNokos[negara].kualitas[tipe]}`;
+      kualitasSelect.appendChild(opt);
+    }
+  }
+  tampilkanKeteranganKualitas();
+}
+
+function tampilkanKeteranganKualitas() {
+  const kualitas = document.getElementById("kualitas").value;
+  const ketBox = document.getElementById("keterangan-kualitas");
+  const ketText = document.getElementById("keterangan-text");
+  if (kualitas && kualitasDescriptions[kualitas]) {
+    ketText.textContent = kualitasDescriptions[kualitas];
+    ketBox.classList.add("show");
+  } else {
+    ketBox.classList.remove("show");
+  }
+}
+
+function bayar() {
+  const nama = document.getElementById("nama").value.trim();
+  const negara = document.getElementById("negara").value;
+  const kualitas = document.getElementById("kualitas").value;
+  const pembayaran = document.getElementById("pembayaran").value;
+  const nomor = document.getElementById("nomor").value.trim();
+
+  if (!nama || !negara || !kualitas || !pembayaran || !nomor) {
+    alert("Lengkapi semua data!");
+    return;
+  }
+
+  const data = hargaNokos[negara];
+  const harga = data.kualitas[kualitas];
+  const kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
+  const adminWa = "62895335107865";
+  const rek = rekening[pembayaran];
+
+  let waPesan = `
+Halo admin, saya telah melakukan transfer pembelian NOKOS.
+
+Berikut datanya:
+- Nama: ${nama}
+- Negara: ${data.nama}
+- Kualitas: ${kualitasNama}
+- Nomor Rekening Saya: ${nomor}
+- Metode Pembayaran: ${pembayaran.toUpperCase()}
+- Harga: ${harga}
+  `.trim();
+
+  document.getElementById("ringkasan").innerHTML = `
+    <p><strong>✅ Detail Transaksi:</strong></p>
+    <p>👤 ${nama}<br>🌍 ${data.nama}<br>📶 ${kualitasNama}<br>💰 ${harga}<br>🏦 Rekening Anda: ${nomor}<br>💳 ${pembayaran.toUpperCase()}</p>
+    <p>🏦 Silakan transfer ke rekening berikut:</p>
+    <p><strong>${pembayaran.toUpperCase()} - a.n. ${rek.nama}<br>Nomor: ${rek.nomor}</strong></p>
+    <p>📩 Setelah transfer, klik tombol berikut untuk kirim ke Admin via WhatsApp:</p>
+    <a href="https://wa.me/${adminWa}?text=${encodeURIComponent(waPesan)}" target="_blank">🔗 Kirim ke Admin</a>
+  `;
+  document.getElementById("ringkasan").style.display = "block";
+}
+</script>
+</body>
+</html>
