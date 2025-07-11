@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Beli nomor kosong (NOKOS) untuk verifikasi akun berbagai negara dengan harga terjangkau dan kualitas terbaik.">
+  <meta name="keywords" content="nokos, nomor kosong, nomor virtual, verifikasi akun, nomor internasional">
+  <title>Saputra Nokos - Beli Nomor Kosong untuk Verifikasi Akun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Urbanist', sans-serif;
+      background: #0f0c29;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #fff;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-bottom: 80px; /* Space for sticky button */
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      padding: 25px;
+      animation: fadeInUp 0.5s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      color: #00e5ff;
+      text-shadow: 0 0 10px #00e5ff;
+      margin-bottom: 15px;
+      animation: pulse 2s infinite;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    .sosmed-btn {
+      display: inline-block;
+      margin: 8px 4px;
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 13px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .sosmed-btn.wa {
+      background-color: #25D366;
+    }
+    .sosmed-btn.tg {
+      background-color: #0088cc;
+    }
+    .sosmed-btn.ig {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    }
+    .sosmed-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    label {
+      margin-top: 14px;
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+      color: #00e5ff;
+    }
+    .input-group {
+      position: relative;
+      margin-top: 6px;
+    }
+    .input-group i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ccc;
+      font-size: 14px;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px 12px 12px 36px;
+      border-radius: 10px;
+      border: 1px solid #555;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #00e5ff;
+      box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.2);
+    }
+    input.error {
+      border-color: #ff4444;
+    }
+    .error-message {
+      color: #ff4444;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #00e676;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0, 230, 118, 0.3);
+    }
+    button:hover {
+      background: #00c853;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 230, 118, 0.4);
+    }
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .info-box {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 16px;
+      border-left: 4px solid #00e676;
+      border-radius: 10px;
+      font-size: 14px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    }
+    .info-box a {
+      display: inline-block;
+      margin-top: 12px;
+      background: #25d366;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .info-box a:hover {
+      background: #1da851;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .keterangan-kualitas {
+      margin-top: 8px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: none;
+      font-size: 13px;
+      border-left: 3px solid #00e5ff;
+    }
+    .keterangan-kualitas.show {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Price fluctuation notice */
+    .price-notice {
+      background: rgba(255, 193, 7, 0.15);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin: 15px 0;
+      font-size: 13px;
+      text-align: center;
+      color: #FFC107;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 5px rgba(255, 193, 7, 0.3); }
+      to { box-shadow: 0 0 15px rgba(255, 193, 7, 0.5); }
+    }
+    .price-notice i {
+      margin-right: 5px;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #1a1a2e;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      width: 400px;
+      text-align: center;
+      animation: modalFadeIn 0.3s;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .modal-btn {
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    .modal-btn.confirm {
+      background: #00e676;
+      color: #000;
+      box-shadow: 0 2px 5px rgba(0, 230, 118, 0.3);
+    }
+    .modal-btn.cancel {
+      background: #ff4444;
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(255, 68, 68, 0.3);
+    }
+    .modal-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Sticky button for mobile */
+    .sticky-button {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      background: rgba(15, 12, 41, 0.9);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+      z-index: 100;
+      display: none;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Enhanced marquee style */
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background: rgba(255, 235, 59, 0.1);
+      border-radius: 10px;
+      margin-bottom: 15px;
+      position: relative;
+      border: 1px solid rgba(255, 235, 59, 0.2);
+      box-shadow: 0 0 10px rgba(255, 235, 59, 0.1);
+    }
+    
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      padding: 12px 0;
+      color: #ffeb3b;
+      font-weight: bold;
+      font-size: 14px;
+      text-shadow: 0 0 5px #ffeb3b;
+      position: relative;
+      animation: marquee 15s linear infinite;
+      will-change: transform;
+    }
+    
+    .marquee-content:hover {
+      animation-play-state: paused;
+    }
+    
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    .marquee-container::before,
+    .marquee-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    .marquee-container::before {
+      left: 0;
+      background: linear-gradient(90deg, rgba(15,12,41,0.9) 0%, rgba(15,12,41,0) 100%);
+    }
+    
+    .marquee-container::after {
+      right: 0;
+      background: linear-gradient(90deg, rgba(15,12,41,0) 0%, rgba(15,12,41,0.9) 100%);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 15px;
+        padding: 18px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      .sticky-button {
+        display: block;
+      }
+      .marquee-content {
+        font-size: 13px;
+        padding: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Saputra Nokos</h2>
+
+    <!-- Price fluctuation notice -->
+    <div class="price-notice">
+      <i class="fas fa-exclamation-triangle"></i>
+      <strong>PERHATIAN:</strong> Harga dapat berubah sewaktu-waktu tergantung ketersediaan server. Harga yang tertera adalah estimasi saat ini.
+    </div>
+
+    <!-- Enhanced marquee -->
+    <div class="marquee-container">
+      <div class="marquee-content">
+        ⚠️ Website ini dalam perkembangan. Untuk nomor yang tidak tersedia, mohon chat admin untuk konfirmasi. 📞 &nbsp;&nbsp;&nbsp;
+        🔥 Harga bisa berubah setiap saat tergantung stok server! &nbsp;&nbsp;&nbsp;
+        💡 Pastikan transfer sesuai nominal yang tertera di ringkasan pesanan!
+      </div>
+    </div>
+
+    <div class="info-box" style="text-align:center; margin-top:15px;">
+      <p><strong>📲 Bergabung & Ikuti Kami</strong></p>
+      <a href="https://chat.whatsapp.com/KUoGURsIF3Z2WwuUqnQcnS?mode=ac_t" class="sosmed-btn wa" target="_blank">
+        <i class="fab fa-whatsapp"></i> GRUP NOKOS
+      </a>
+      <a href="https://t.me/gotorussia633" class="sosmed-btn tg" target="_blank">
+        <i class="fab fa-telegram"></i> Saluran Telegram
+      </a>
+      <a href="https://www.instagram.com/exrin.633?igsh=MTN6eGdiY3c1aWdnbA==" class="sosmed-btn ig" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+    </div>
+    <div class="info-box">
+      <p><strong>Apa itu NOKOS?</strong><br>
+        NOKOS adalah *nomor kosong* atau *nomor virtual* untuk verifikasi akun, tidak terikat pada SIM fisik.</p>
+      <p>💡 Cocok untuk: membuat akun baru, verifikasi layanan tanpa memakai nomor utama.</p>
+    </div>
+
+    <form id="orderForm">
+      <label for="nama">Nama Sesuai Rekening Anda</label>
+      <div class="input-group">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required>
+        <div class="error-message" id="nama-error">Nama harus diisi</div>
+      </div>
+
+      <label for="negara">Pilih Negara</label>
+      <div class="input-group">
+        <i class="fa-solid fa-globe"></i>
+        <select id="negara" onchange="tampilkanKualitas()" required>
+          <option value="">-- Pilih Negara --</option>
+          <option value="id">🇮🇩 Indonesia</option>
+          <option value="us">🇺🇸 Amerika Serikat</option>
+          <option value="jp">🇯🇵 Jepang</option>
+          <option value="can">🇨🇦 Canada</option>
+          <option value="col">🇨🇴 Colombia</option>
+          <option value="ken">🇰🇪 Kenya</option>
+          <option value="rus">🇷🇺 Russia</option>
+          <option value="viet">🇻🇳 Vietnam</option>
+          <option value="mes">🇪🇬 Mesir</option>
+          <option value="bra">🇧🇷 Brazil</option>
+          <option value="thai">🇹🇭 Thailand</option>
+          <option value="hong">🇭🇰 Hongkong</option>
+          <option value="bel">🇳🇱 Belanda</option>
+          <option value="jer">🇩🇪 Jerman</option>
+          <option value="fil">🇵🇭 Filipina</option>
+          <option value="morr">🇲🇦 Morocco</option>
+        </select>
+        <div class="error-message" id="negara-error">Pilih negara</div>
+      </div>
+
+      <label for="kualitas">Pilih Kualitas Nomor</label>
+      <div class="input-group">
+        <i class="fa-solid fa-signal"></i>
+        <select id="kualitas" onchange="tampilkanKeteranganKualitas()" required disabled>
+          <option value="">-- Pilih Kualitas --</option>
+        </select>
+        <div class="error-message" id="kualitas-error">Pilih kualitas nomor</div>
+      </div>
+
+      <div id="keterangan-kualitas" class="keterangan-kualitas">
+        <p id="keterangan-text"></p>
+      </div>
+
+      <label for="pembayaran">Metode Pembayaran</label>
+      <div class="input-group">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        <select id="pembayaran" required>
+          <option value="">-- Pilih Metode --</option>
+          <option value="gopay">GoPay</option>
+          <option value="seabank">SeaBank</option>
+          <option value="dana">DANA</option>
+        </select>
+        <div class="error-message" id="pembayaran-error">Pilih metode pembayaran</div>
+      </div>
+
+      <label for="nomor">Nomor Rekening Anda</label>
+      <div class="input-group">
+        <i class="fa-solid fa-address-card"></i>
+        <input type="text" id="nomor" placeholder="Contoh: 089876543210" required>
+        <div class="error-message" id="nomor-error">Nomor harus diisi dan hanya angka</div>
+      </div>
+
+      <button type="button" onclick="validateAndSubmit()" id="submitBtn">
+        <span id="buttonText">Bayar Sekarang</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </form>
+
+    <div id="ringkasan" class="info-box" style="display:none;"></div>
+  </div>
+
+  <!-- Sticky button for mobile -->
+  <div class="sticky-button">
+    <button onclick="validateAndSubmit()">Bayar Sekarang</button>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal">
+    <div class="modal-content">
+      <h3>Konfirmasi Pesanan</h3>
+      <p id="modalMessage">Apakah data yang Anda masukkan sudah benar?</p>
+      <div class="modal-buttons">
+        <button class="modal-btn confirm" onclick="processPayment()">Ya, Lanjutkan</button>
+        <button class="modal-btn cancel" onclick="closeModal()">Periksa Kembali</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize with empty prices, will be fetched from API
+    const hargaNokos = {
+      id: { nama: "Indonesia", kualitas: {} },
+      us: { nama: "Amerika Serikat", kualitas: {} },
+      jp: { nama: "Jepang", kualitas: {} },
+      can: { nama: "Canada", kualitas: {} },
+      col: { nama: "Colombia", kualitas: {} },
+      ken: { nama: "Kenya", kualitas: {} },
+      rus: { nama: "Russia", kualitas: {} },
+      viet: { nama: "Vietnam", kualitas: {} },
+      mes: { nama: "Mesir", kualitas: {} },
+      bra: { nama: "Brazil", kualitas: {} },
+      thai: { nama: "Thailand", kualitas: {} },
+      hong: { nama: "Hongkong", kualitas: {} },
+      bel: { nama: "Belanda", kualitas: {} },
+      jer: { nama: "Jerman", kualitas: {} },
+      fil: { nama: "Filipina", kualitas: {} },
+      morr: { nama: "Morocco", kualitas: {} }
+    };
+
+    const rekening = {
+      gopay: { nama: "IZMET", nomor: "0895335107865" },
+      seabank: { nama: "IZMET", nomor: "901444670611" },
+      dana: { nama: "REPIKA", nomor: "085346808546" }
+    };
+
+    const kualitasDescriptions = {
+      biasa: "⭐ Standar, masa aktif terbatas, cocok untuk percobaan cepat.",
+      premium: "⭐⭐ Lebih stabil, masa aktif lebih lama.",
+      super: "⭐⭐⭐ Kualitas terbaik, paling stabil, masa aktif paling panjang."
+    };
+
+    // Fetch prices from API (simulated)
+    function fetchPrices() {
+      // In a real implementation, this would be an actual API call
+      // For demo purposes, we'll use a timeout to simulate network delay
+      showLoading(true);
+      
+      setTimeout(() => {
+        // Simulated API response with random price fluctuations
+        const basePrices = {
+          id: { biasa: 5000, premium: 8000, super: 10000 },
+          us: { biasa: 45000, premium: 70000, super: 90000 },
+          jp: { biasa: 80000, premium: 120000, super: 180000 },
+          can: { biasa: 30000, premium: 40000, super: 50000 },
+          col: { biasa: 25000, premium: 35000, super: 45000 },
+          ken: { biasa: 17000, premium: 25000, super: 35000 },
+          rus: { biasa: 40000, premium: 65000, super: 85000 },
+          viet: { biasa: 25000, premium: 30000, super: 35000 },
+          mes: { biasa: 30000, premium: 45000, super: 60000 },
+          bra: { biasa: 35000, premium: 50000, super: 65000 },
+          thai: { biasa: 35000, premium: 60000, super: 85000 },
+          hong: { biasa: 35000, premium: 60000, super: 85000 },
+          bel: { biasa: 35000, premium: 55000, super: 70000 },
+          jer: { biasa: 85000, premium: 170000, super: 250000 },
+          fil: { biasa: 20000, premium: 30000, super: 37000 },
+          morr: { biasa: 35000, premium: 50000, super: 65000 }
+        };
+
+        // Apply random fluctuation (between -10% to +15%)
+        const apiResponse = {};
+        for (const country in basePrices) {
+          apiResponse[country] = {};
+          for (const quality in basePrices[country]) {
+            const fluctuation = 0.9 + Math.random() * 0.25; // 0.9 to 1.15
+            const fluctuatedPrice = Math.round(basePrices[country][quality] * fluctuation / 1000) * 1000;
+            apiResponse[country][quality] = "Rp" + fluctuatedPrice.toLocaleString('id-ID');
+          }
+        }
+
+        // Update hargaNokos with API data
+        for (const country in apiResponse) {
+          if (hargaNokos[country]) {
+            hargaNokos[country].kualitas = apiResponse[country];
+          }
+        }
+
+        showLoading(false);
+        console.log("Prices updated from API with fluctuations");
+        
+        // Update the quality dropdown if a country is already selected
+        const selectedCountry = document.getElementById("negara").value;
+        if (selectedCountry) {
+          tampilkanKualitas();
+        }
+      }, 1000);
+    }
+
+    // Call fetchPrices when page loads and every 5 minutes
+    document.addEventListener('DOMContentLoaded', function() {
+      fetchPrices();
+      setupInputValidation();
+      
+      // Refresh prices periodically
+      setInterval(fetchPrices, 5 * 60 * 1000); // 5 minutes
+    });
+
+    function showLoading(show) {
+      const spinner = document.getElementById('spinner');
+      const buttonText = document.getElementById('buttonText');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      if (show) {
+        spinner.style.display = 'block';
+        buttonText.style.display = 'none';
+        submitBtn.disabled = true;
+      } else {
+        spinner.style.display = 'none';
+        buttonText.style.display = 'block';
+        submitBtn.disabled = false;
+      }
+    }
+
+    function setupInputValidation() {
+      const nomorInput = document.getElementById('nomor');
+      nomorInput.addEventListener('input', function(e) {
+        // Only allow numbers
+        this.value = this.value.replace(/[^0-9]/g, '');
+        validateNomor();
+      });
+
+      // Add validation for other fields
+      document.getElementById('nama').addEventListener('blur', validateNama);
+      document.getElementById('negara').addEventListener('change', validateNegara);
+      document.getElementById('kualitas').addEventListener('change', validateKualitas);
+      document.getElementById('pembayaran').addEventListener('change', validatePembayaran);
+    }
+
+    function validateNama() {
+      const nama = document.getElementById('nama').value.trim();
+      const errorElement = document.getElementById('nama-error');
+      
+      if (!nama) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateNegara() {
+      const negara = document.getElementById('negara').value;
+      const errorElement = document.getElementById('negara-error');
+      
+      if (!negara) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateKualitas() {
+      const kualitas = document.getElementById('kualitas').value;
+      const errorElement = document.getElementById('kualitas-error');
+      
+      if (!kualitas) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validatePembayaran() {
+      const pembayaran = document.getElementById('pembayaran').value;
+      const errorElement = document.getElementById('pembayaran-error');
+      
+      if (!pembayaran) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateNomor() {
+      const nomor = document.getElementById('nomor').value.trim();
+      const errorElement = document.getElementById('nomor-error');
+      
+      if (!nomor || !/^\d+$/.test(nomor)) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateAndSubmit() {
+      const isNamaValid = validateNama();
+      const isNegaraValid = validateNegara();
+      const isKualitasValid = validateKualitas();
+      const isPembayaranValid = validatePembayaran();
+      const isNomorValid = validateNomor();
+
+      if (isNamaValid && isNegaraValid && isKualitasValid && isPembayaranValid && isNomorValid) {
+        showConfirmationModal();
+      } else {
+        // Scroll to first error
+        const firstError = document.querySelector('.error-message[style="display: block;"]');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+
+    function showConfirmationModal() {
+      const nama = document.getElementById('nama').value.trim();
+      const negara = document.getElementById('negara').value;
+      const kualitas = document.getElementById('kualitas').value;
+      const pembayaran = document.getElementById('pembayaran').value;
+      
+      const negaraNama = hargaNokos[negara] ? hargaNokos[negara].nama : '';
+      const kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
+      const harga = hargaNokos[negara] ? hargaNokos[negara].kualitas[kualitas] : '';
+      
+      const message = `
+        <p>Nama: <strong>${nama}</strong></p>
+        <p>Negara: <strong>${negaraNama}</strong></p>
+        <p>Kualitas: <strong>${kualitasNama} (${harga})</strong></p>
+        <p>Pembayaran: <strong>${pembayaran.toUpperCase()}</strong></p>
+        <p style="color: #FFC107; font-size: 13px; margin-top: 10px;">
+          <i class="fas fa-exclamation-circle"></i> Pastikan harga sesuai dengan yang tertera saat ini
+        </p>
+      `;
+      
+      document.getElementById('modalMessage').innerHTML = message;
+      document.getElementById('confirmationModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('confirmationModal').style.display = 'none';
+    }
+
+    function processPayment() {
+      closeModal();
+      showLoading(true);
+      
+      // Simulate processing delay
+      setTimeout(() => {
+        showLoading(false);
+        bayar();
+      }, 1500);
+    }
+
+    function tampilkanKualitas() {
+      const negara = document.getElementById("negara").value;
+      const kualitasSelect = document.getElementById("kualitas");
+      
+      kualitasSelect.innerHTML = "";
+      kualitasSelect.disabled = !negara;
+      
+      if (negara && hargaNokos[negara] && Object.keys(hargaNokos[negara].kualitas).length > 0) {
+        kualitasSelect.disabled = false;
+        kualitasSelect.innerHTML = '<option value="">-- Pilih Kualitas --</option>';
+        
+        for (let tipe in hargaNokos[negara].kualitas) {
+          let opt = document.createElement("option");
+          opt.value = tipe;
+          opt.text = `${tipe.charAt(0).toUpperCase() + tipe.slice(1)} - ${hargaNokos[negara].kualitas[tipe]}`;
+          kualitasSelect.appendChild(opt);
+        }
+      } else if (negara) {
+        kualitasSelect.innerHTML = '<option value="">Memuat harga...</option>';
+        // If prices aren't loaded yet, fetch them
+        fetchPrices();
+      }
+      
+      tampilkanKeteranganKualitas();
+      validateKualitas();
+    }
+
+    function tampilkanKeteranganKualitas() {
+      const kualitas = document.getElementById("kualitas").value;
+      const ketBox = document.getElementById("keterangan-kualitas");
+      const ketText = document.getElementById("keterangan-text");
+      
+      if (kualitas && kualitasDescriptions[kualitas]) {
+        ketText.textContent = kualitasDescriptions[kualitas];
+        ketBox.classList.add("show");
+      } else {
+        ketBox.classList.remove("show");
+      }
+    }
+
+    function bayar() {
+      const nama = document.getElementById("nama").value.trim();
+      const negara = document.getElementById("negara").value;
+      const kualitas = document.getElementById("kualitas").value;
+      const pembayaran = document.getElementById("pembayaran").value;
+      const nomor = document.getElementById("nomor").value.trim();
+
+      const data = hargaNokos[negara];
+      const harga = data.kualitas[kualitas];
+      const kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
+      const adminWa = "62895335107865";
+      const rek = rekening[pembayaran];
+
+      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}\n\n*Harap diperhatikan bahwa harga bisa berubah sewaktu-waktu tergantung ketersediaan server.*`.trim();
+
+      document.getElementById("ringkasan").innerHTML = `
+        <p><strong>✅ Detail Transaksi:</strong></p>
+        <p>👤 ${nama}<br>🌍 ${data.nama}<br>📶 ${kualitasNama}<br>💰 ${harga}<br>🏦 Rekening Anda: ${nomor}<br>💳 ${pembayaran.toUpperCase()}</p>
+        <p style="color: #FFC107; font-size: 13px;">
+          <i class="fas fa-exclamation-triangle"></i> Pastikan transfer sesuai dengan nominal di atas, harga bisa berubah sewaktu-waktu.
+        </p>
+        <p>🏦 Silakan transfer ke rekening berikut:</p>
+        <p><strong>${pembayaran.toUpperCase()} - a.n. ${rek.nama}<br>Nomor: ${rek.nomor}</strong></p>
+        <p>📩 Setelah transfer, klik tombol berikut untuk kirim ke Admin via WhatsApp:</p>
+        <a href="https://wa.me/${adminWa}?text=${encodeURIComponent(waPesan)}" target="_blank" class="sosmed-btn wa" style="width:100%;text-align:center;">
+          <i class="fab fa-whatsapp"></i> Kirim ke Admin
+        </a>
+      `;
+      document.getElementById("ringkasan").style.display = "block";
+      
+      // Scroll to summary
+      document.getElementById("ringkasan").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Make sticky button follow form validation
+    document.addEventListener('scroll', function() {
+      const form = document.getElementById('orderForm');
+      const formRect = form.getBoundingClientRect();
+      const stickyBtn = document.querySelector('.sticky-button');
+      
+      if (formRect.bottom < window.innerHeight) {
+        stickyBtn.style.display = 'none';
+      } else {
+        stickyBtn.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
