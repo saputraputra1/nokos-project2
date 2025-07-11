@@ -1,0 +1,11 @@
+{
+  "name": "nokos-vercel-api",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "mysql2": "^3.9.2"
+  }
+}
