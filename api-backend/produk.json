@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "layanan": "WhatsApp",
+    "negara": "Jepang",
+    "harga": 1200
+  },
+  {
+    "id": "2",
+    "layanan": "Telegram",
+    "negara": "Indonesia",
+    "harga": 1000
+  }
+]
