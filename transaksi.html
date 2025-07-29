@@ -892,13 +892,13 @@
 
     // Spin wheel prizes and probabilities
     const spinPrizes = [
-      { id: 1, name: "NOKOS Indonesia (Biasa)", color: "#FF5252", probability: 20 },
-      { id: 2, name: "NOKOS Filipina (Premium)", color: "#FF9800", probability: 15 },
-      { id: 3, name: "NOKOS Telegram Indonesia", color: "#4CAF50", probability: 10 },
-      { id: 4, name: "NOKOS Telegram+WhatsApp (Indonesia)", color: "#2196F3", probability: 5 },
-      { id: 5, name: "NOKOS Filipina+Indonesia+Kenya", color: "#9C27B0", probability: 0.01 },
-      { id: 6, name: "Coba lagi, beli NOKOS baru untuk mendapatkan bonus", color: "#607D8B", probability: 99.8 },
-      { id: 7, name: "NOKOS Jepang", color: "#E91E63", probability: 0 } // Not obtainable
+      { id: 1, name: "Nokos Indo (Biasa)", color: "#FF5252", probability: 1 },
+      { id: 2, name: "Nokos Filipina (Premium)", color: "#FF9800", probability: 1 },
+      { id: 3, name: "Nokos Telegram Indonesia", color: "#4CAF50", probability: 0.7 },
+      { id: 4, name: "Nokos Telegram+WhatsApp (Indonesia)", color: "#2196F3", probability: 0.4 },
+      { id: 5, name: "Nokos Filipina+Indonesia+Kenya", color: "#9C27B0", probability: 0.01 },
+      { id: 6, name: "Coba lagi", color: "#607D8B", probability: 96.89 },
+      { id: 7, name: "Nokos Jepang", color: "#E91E63", probability: 0 } // Not obtainable
     ];
 
     // Device ID management
@@ -1013,7 +1013,11 @@
       
       // Show result after spin completes
       setTimeout(() => {
-        resultText.innerHTML = `Anda mendapatkan: <strong>${selectedPrize.name}</strong>`;
+        if(selectedPrize.id === 6) {
+            resultText.innerHTML = `<strong>${selectedPrize.name}</strong>, beli nokos baru untuk mendapatkan bonus nya`;
+        } else {
+            resultText.innerHTML = `Anda mendapatkan: <strong>${selectedPrize.name}</strong>`;
+        }
         resultDiv.style.display = 'block';
         
         // Save that user has used their spin
