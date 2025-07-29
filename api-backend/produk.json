@@ -3,12 +3,83 @@
     "id": "1",
     "layanan": "WhatsApp",
     "negara": "Jepang",
-    "harga": 1200
+    "harga": 11200,
+    "kualitas": {
+      "Super": {
+        "harga": 11200,
+        "keterangan": "garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+      }
+    }
   },
   {
     "id": "2",
     "layanan": "Telegram",
     "negara": "Indonesia",
     "harga": 1000
+  },
+  {
+    "id": "3",
+    "layanan": "WhatsApp",
+    "negara": "Laos",
+    "kualitas": {
+      "Biasa": 45000,
+      "Premium": 60000,
+      "Super": {
+        "harga": 80000,
+        "keterangan": "garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+      }
+    }
+  },
+  {
+    "id": "4",
+    "layanan": "WhatsApp",
+    "negara": "Cambodia",
+    "kualitas": {
+      "Biasa": 55000,
+      "Premium": 70000,
+      "Super": {
+        "harga": 90000,
+        "keterangan": "garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+      }
+    }
+  },
+  {
+    "id": "5",
+    "layanan": "WhatsApp",
+    "negara": "China",
+    "kualitas": {
+      "Biasa": 50000,
+      "Premium": 75000,
+      "Super": {
+        "harga": 105000,
+        "keterangan": "garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+      }
+    }
+  },
+  {
+    "id": "6",
+    "layanan": "WhatsApp",
+    "negara": "Malaysia",
+    "kualitas": {
+      "Biasa": 55000,
+      "Premium": 70000,
+      "Super": {
+        "harga": 85000,
+        "keterangan": "garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+      }
+    }
+  },
+  {
+    "id": "7",
+    "layanan": "WhatsApp",
+    "negara": "Singapura",
+    "kualitas": {
+      "Biasa": 250000,
+      "Premium": 400000,
+      "Super": {
+        "harga": 750000,
+        "keterangan": "garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+      }
+    }
   }
 ]
