@@ -809,24 +809,7 @@
     </div>
   </div>
 
-  <!-- Spin Login Modal -->
-  <div class="spin-login-modal" id="spinLoginModal">
-    <div class="spin-login-content">
-      <h3 class="spin-login-title">LOGIN UNTUK SPIN BONUS</h3>
-      <p>Masukkan Device ID Anda untuk mengakses spin bonus:</p>
-      
-      <div class="device-id-display" id="deviceIdDisplay">
-        Device ID Anda: <span id="displayDeviceId"></span>
-      </div>
-      
-      <input type="text" id="spinLoginInput" class="spin-login-input" placeholder="Masukkan Device ID Anda">
-      <button class="spin-login-btn" onclick="verifySpinLogin()">MASUK</button>
-      
-      <p class="spin-login-note">
-        * Device ID unik untuk perangkat Anda dan hanya bisa digunakan 1x spin per pembelian.
-      </p>
-    </div>
-  </div>
+  <!-- Spin Login Modal (REMOVED) -->
 
   <script>
     const hargaNokos = {
@@ -890,23 +873,24 @@
       super: "⭐⭐⭐ Kualitas terbaik, paling stabil, masa aktif paling panjang.<br>Garansi 2 hari, kalau ke spam sebelum 2 hari ganti nomer baru 1x"
     };
 
-    // Spin wheel prizes and probabilities
+    // Spin wheel prizes and probabilities - UPDATED
     const spinPrizes = [
-      { id: 1, name: "NOKOS Indonesia (Biasa)", color: "#FF5252", probability: 20 },
-      { id: 2, name: "NOKOS Filipina (Premium)", color: "#FF9800", probability: 15 },
-      { id: 3, name: "NOKOS Telegram Indonesia", color: "#4CAF50", probability: 10 },
-      { id: 4, name: "NOKOS Telegram+WhatsApp (Indonesia)", color: "#2196F3", probability: 5 },
-      { id: 5, name: "NOKOS Filipina+Indonesia+Kenya", color: "#9C27B0", probability: 0.01 },
-      { id: 6, name: "Coba lagi, beli NOKOS baru untuk mendapatkan bonus", color: "#607D8B", probability: 99.8 },
-      { id: 7, name: "NOKOS Jepang", color: "#E91E63", probability: 0 } // Not obtainable
+        { label: "NOKOS Indonesia (Biasa)", color: "red", probability: 0.0001 },
+        { label: "NOKOS Jepang", color: "pink", probability: 0 },
+        { label: "NOKOS Rusia", color: "blue", probability: 0 },
+        { label: "NOKOS Kenya + Filipina", color: "purple", probability: 0 },
+        { label: "NOKOS Telegram Premium", color: "orange", probability: 0 },
+        { label: "NOKOS WhatsApp Global", color: "green", probability: 0 },
+        { label: "Coba lagi, beli NOKOS baru untuk dapat bonus", color: "grey", probability: 0.9999 }
     ];
 
-    // Device ID management
+    // Device ID and Purchase ID management
     let deviceId = localStorage.getItem('deviceId');
     if (!deviceId) {
       deviceId = generateDeviceId();
       localStorage.setItem('deviceId', deviceId);
     }
+    let currentPurchaseId = null;
 
     // Call initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
@@ -927,54 +911,58 @@
       spinPrizes.forEach((prize, index) => {
         const section = document.createElement('div');
         section.className = 'spin-section';
-        section.style.transform = `rotate(${index * sectionAngle}deg)`;
+        // Adjust rotation to align pointer correctly
+        section.style.transform = `rotate(${index * sectionAngle - sectionAngle / 2}deg) skewY(-${90 - sectionAngle}deg)`;
         section.style.backgroundColor = prize.color;
         
         const span = document.createElement('span');
-        span.textContent = prize.name;
+        span.textContent = prize.label;
+        // Counter-transform the text
+        span.style.transform = `skewY(${90 - sectionAngle}deg) rotate(${sectionAngle / 2}deg)`;
+        span.style.writingMode = 'horizontal-tb';
+        span.style.textAlign = 'center';
+        span.style.width = '150%';
+        span.style.marginLeft = '-25%';
+
         section.appendChild(span);
         
         wheel.appendChild(section);
       });
     }
 
-    function checkSpinEligibility() {
+    function checkSpinEligibility(purchaseId) {
       const provider = document.getElementById('provider').value;
       const negara = document.getElementById('negara').value;
       const kualitas = document.getElementById('kualitas').value;
       const spinContainer = document.getElementById('spinContainer');
-      
-      // Check if eligible for spin (super quality and not Indonesia, Philippines, or Kenya)
-      const isEligible = kualitas === 'super' && 
+      const spinBtn = document.getElementById('spinBtn');
+      const resultDiv = document.getElementById('spinResult');
+
+      const spinUsedKey = `spinUsed_${purchaseId}`;
+      const hasSpun = localStorage.getItem(spinUsedKey);
+
+      const isEligibleBase = kualitas === 'super' &&
                          negara && 
                          !['id', 'fil', 'ken'].includes(negara) && 
                          provider;
-      
-      spinContainer.style.display = isEligible ? 'block' : 'none';
-      
-      if (isEligible) {
-        // Scroll to spin container
-        setTimeout(() => {
-          spinContainer.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-      }
-    }
 
-    function showSpinLogin() {
-      document.getElementById('displayDeviceId').textContent = deviceId;
-      document.getElementById('spinLoginModal').style.display = 'flex';
-    }
-
-    function verifySpinLogin() {
-      const input = document.getElementById('spinLoginInput').value.trim();
-      
-      if (input === deviceId) {
-        document.getElementById('spinLoginModal').style.display = 'none';
-        document.getElementById('spinBtn').disabled = false;
+      if (isEligibleBase && !hasSpun) {
+          spinContainer.style.display = 'block';
+          spinBtn.style.display = 'block';
+          spinBtn.disabled = false;
+          resultDiv.style.display = 'none';
+          setTimeout(() => spinContainer.scrollIntoView({ behavior: 'smooth' }), 300);
+      } else if (isEligibleBase && hasSpun) {
+          spinContainer.style.display = 'block';
+          spinBtn.style.display = 'none';
+          resultDiv.style.display = 'block';
+          document.getElementById('resultText').innerHTML = "Anda sudah menggunakan spin untuk pembelian ini.";
       } else {
-        alert('Device ID tidak valid. Silakan masukkan ID yang benar.');
+          spinContainer.style.display = 'none';
       }
     }
+
+    // showSpinLogin and verifySpinLogin functions removed as they are no longer needed.
 
     function startSpin() {
       const btn = document.getElementById('spinBtn');
@@ -982,42 +970,51 @@
       const resultDiv = document.getElementById('spinResult');
       const resultText = document.getElementById('resultText');
       
+      if (!currentPurchaseId) {
+          alert("Error: ID Pembelian tidak ditemukan. Silakan coba lagi.");
+          return;
+      }
+
       btn.disabled = true;
       resultDiv.style.display = 'none';
       
-      // Determine the prize based on probabilities
-      const random = Math.random() * 100;
+      // --- New Prize Logic ---
+      let random = Math.random();
       let cumulativeProbability = 0;
-      let selectedPrize = null;
-      
-      for (const prize of spinPrizes) {
-        cumulativeProbability += prize.probability;
-        if (random <= cumulativeProbability) {
-          selectedPrize = prize;
-          break;
-        }
+      let selectedPrize;
+
+      for (let i = 0; i < spinPrizes.length; i++) {
+          cumulativeProbability += spinPrizes[i].probability;
+          if (random < cumulativeProbability) {
+              selectedPrize = spinPrizes[i];
+              break;
+          }
       }
       
-      // For the "not obtainable" prize (Japan), default to "try again"
-      if (selectedPrize.id === 7) {
-        selectedPrize = spinPrizes.find(p => p.id === 6);
+      // Ensure only "NOKOS Indonesia (Biasa)" or "Coba lagi..." can be won
+      if (selectedPrize.label !== "NOKOS Indonesia (Biasa)" && selectedPrize.label !== "Coba lagi, beli NOKOS baru untuk dapat bonus") {
+          selectedPrize = spinPrizes.find(p => p.label === "Coba lagi, beli NOKOS baru untuk dapat bonus");
       }
-      
+      // --- End New Prize Logic ---
+
       // Calculate rotation (5 full rotations + prize angle)
       const sectionAngle = 360 / spinPrizes.length;
-      const prizeIndex = spinPrizes.findIndex(p => p.id === selectedPrize.id);
-      const targetAngle = 5 * 360 + (360 - (prizeIndex * sectionAngle + sectionAngle/2));
+      const prizeIndex = spinPrizes.findIndex(p => p.label === selectedPrize.label);
+      const randomOffset = Math.random() * sectionAngle - (sectionAngle / 2);
+      const targetAngle = (360 * 5) + (360 - (prizeIndex * sectionAngle)) - randomOffset;
       
       // Apply rotation
       wheel.style.transform = `rotate(${targetAngle}deg)`;
       
       // Show result after spin completes
       setTimeout(() => {
-        resultText.innerHTML = `Anda mendapatkan: <strong>${selectedPrize.name}</strong>`;
+        resultText.innerHTML = `Anda mendapatkan: <strong>${selectedPrize.label}</strong>`;
         resultDiv.style.display = 'block';
         
-        // Save that user has used their spin
-        localStorage.setItem('spinUsed', 'true');
+        // Save spin status for this specific purchase
+        const spinUsedKey = `spinUsed_${currentPurchaseId}`;
+        localStorage.setItem(spinUsedKey, 'true');
+        btn.style.display = 'none'; // Hide button after spin
       }, 4000);
     }
 
@@ -1125,6 +1122,8 @@
       const isNomorValid = validateNomor();
 
       if (isNamaValid && isNegaraValid && isKualitasValid && isPembayaranValid && isNomorValid) {
+        // Generate a unique purchase ID for this transaction
+        currentPurchaseId = 'purchase-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
         showConfirmationModal();
       } else {
         // Scroll to first error
@@ -1237,7 +1236,9 @@
       }
       
       tampilkanKeteranganKualitas();
-      checkSpinEligibility();
+      // We can't check eligibility here properly without a purchase ID yet.
+      // The check will be done when the user clicks "Bayar".
+      document.getElementById('spinContainer').style.display = 'none';
       validateKualitas();
     }
 
@@ -1269,10 +1270,11 @@
       const adminWa = "6285647271487";
       const rek = rekening[pembayaran];
 
-      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}`.trim();
+      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\n(ID Pembelian: ${currentPurchaseId})\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}`.trim();
 
       document.getElementById("ringkasan").innerHTML = `
         <p><strong>✅ Detail Transaksi:</strong></p>
+        <p>ID Pembelian: <strong>${currentPurchaseId}</strong></p>
         <p>👤 ${nama}<br>Provider: ${providerNama}<br>🌍 ${data.nama}<br>📶 ${kualitasNama}<br>💰 ${harga}<br>🏦 Rekening Anda: ${nomor}<br>💳 ${pembayaran.toUpperCase()}</p>
         <p>🏦 Silakan transfer ke rekening berikut:</p>
         <p><strong>${pembayaran.toUpperCase()} - a.n. ${rek.nama}<br>Nomor: ${rek.nomor}</strong></p>
@@ -1286,13 +1288,8 @@
       // Scroll to summary
       document.getElementById("ringkasan").scrollIntoView({ behavior: 'smooth' });
       
-      // Show spin login if eligible
-      const isEligibleForSpin = kualitas === 'super' && !['id', 'fil', 'ken'].includes(negara);
-      if (isEligibleForSpin && !localStorage.getItem('spinUsed')) {
-        setTimeout(() => {
-          showSpinLogin();
-        }, 1000);
-      }
+      // Check spin eligibility with the current purchase ID
+      checkSpinEligibility(currentPurchaseId);
     }
 
     // Make sticky button follow form validation
