@@ -452,10 +452,20 @@
   border-radius: 50%;
   position: relative;
   overflow: hidden;
-  border: 8px solid #333;
-  box-shadow: 0 0 0 8px #222, 0 0 30px rgba(0, 0, 0, 0.8);
-  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  border: 8px solid #FFDF00;
+  box-shadow: 0 0 0 8px #FFD700, 0 0 30px rgba(255, 215, 0, 0.8);
+  transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
   transform: rotate(0deg);
+  background: conic-gradient(
+    from 0deg,
+    #FF5252 0deg 51.4deg,
+    #FF9800 51.4deg 102.8deg,
+    #4CAF50 102.8deg 154.2deg,
+    #2196F3 154.2deg 205.6deg,
+    #9C27B0 205.6deg 257deg,
+    #607D8B 257deg 308.4deg,
+    #E91E63 308.4deg 360deg
+  );
 }
 
 .spin-section {
@@ -491,28 +501,26 @@
 }
 
 .spin-pointer:before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid #ff4444;
-  filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
+  content: "▼";
+  font-size: 50px;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 1);
 }
 
 .spin-btn {
   margin-top: 20px;
-  padding: 12px 30px;
-  background: linear-gradient(45deg, #ff00cc, #3333ff);
-  color: white;
+  padding: 15px 40px;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: #1a1a2e;
   border: none;
   border-radius: 50px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .spin-btn:hover {
@@ -742,6 +750,12 @@
     </div>
 
     <div id="ringkasan" class="info-box" style="display:none;"></div>
+
+    <!-- Spin History -->
+    <div id="spinHistoryContainer" class="info-box" style="display:none; margin-top: 20px;">
+        <h3>Riwayat Spin</h3>
+        <ul id="spinHistoryList"></ul>
+    </div>
   </div>
 
   <!-- Sticky button for mobile -->
@@ -912,7 +926,31 @@
     document.addEventListener('DOMContentLoaded', function() {
       setupInputValidation();
       createSpinWheel();
+      displaySpinHistory();
     });
+
+    function saveSpinToHistory(prizeName) {
+        let history = JSON.parse(localStorage.getItem('spinHistory')) || [];
+        history.push({ prize: prizeName, date: new Date().toLocaleString() });
+        localStorage.setItem('spinHistory', JSON.stringify(history));
+        displaySpinHistory();
+    }
+
+    function displaySpinHistory() {
+        const history = JSON.parse(localStorage.getItem('spinHistory')) || [];
+        const historyContainer = document.getElementById('spinHistoryContainer');
+        const historyList = document.getElementById('spinHistoryList');
+
+        if (history.length > 0) {
+            historyContainer.style.display = 'block';
+            historyList.innerHTML = '';
+            history.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.date}: ${item.prize}`;
+                historyList.appendChild(li);
+            });
+        }
+    }
 
     function generateDeviceId() {
       return 'd-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36);
@@ -1022,7 +1060,9 @@
         
         // Save that user has used their spin
         localStorage.setItem('spinUsed', 'true');
-      }, 4000);
+        localStorage.setItem('spinResult', selectedPrize.name);
+        saveSpinToHistory(selectedPrize.name);
+      }, 5000);
     }
 
     function showLoading(show) {
@@ -1273,7 +1313,16 @@
       const adminWa = "6285647271487";
       const rek = rekening[pembayaran];
 
-      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}`.trim();
+      const isEligibleForSpin = kualitas === 'super' && !['id', 'fil', 'ken'].includes(negara);
+      let bonusPesan = "";
+      if (isEligibleForSpin) {
+          const spinResult = localStorage.getItem('spinResult');
+          if (spinResult) {
+              bonusPesan = `\n- Bonus Spin: ${spinResult}`;
+          }
+      }
+
+      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}${bonusPesan}`.trim();
 
       document.getElementById("ringkasan").innerHTML = `
         <p><strong>✅ Detail Transaksi:</strong></p>
@@ -1290,12 +1339,10 @@
       // Scroll to summary
       document.getElementById("ringkasan").scrollIntoView({ behavior: 'smooth' });
       
-      // Show spin login if eligible
-      const isEligibleForSpin = kualitas === 'super' && !['id', 'fil', 'ken'].includes(negara);
+      // Show spin wheel if eligible
       if (isEligibleForSpin && !localStorage.getItem('spinUsed')) {
-        setTimeout(() => {
-          showSpinLogin();
-        }, 1000);
+        document.getElementById('spinContainer').style.display = 'block';
+        showSpinLogin();
       }
     }
 
