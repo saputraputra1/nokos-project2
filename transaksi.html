@@ -660,8 +660,30 @@
     };
 
     // Call initialize when page loads
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
       setupInputValidation();
+
+      const userId = localStorage.getItem('user_id');
+      const nama = localStorage.getItem('user_nama');
+      const wa = localStorage.getItem('user_wa');
+
+      if (userId && nama && wa) {
+        try {
+          const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId, nama, wa })
+          });
+          const data = await response.json();
+          if (response.ok) {
+            localStorage.setItem('token', data.token);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
     });
 
     function showLoading(show) {
@@ -901,10 +923,19 @@
       const ketText = document.getElementById("keterangan-text");
       
       if (kualitas && kualitasDescriptions[kualitas]) {
-        ketText.textContent = kualitasDescriptions[kualitas];
+        ketText.innerHTML = kualitasDescriptions[kualitas];
         ketBox.classList.add("show");
       } else {
         ketBox.classList.remove("show");
+      }
+
+      const spinContainer = document.getElementById('spin-container');
+      const token = localStorage.getItem('token');
+
+      if (kualitas === 'super' && token) {
+        spinContainer.style.display = 'block';
+      } else {
+        spinContainer.style.display = 'none';
       }
     }
 
