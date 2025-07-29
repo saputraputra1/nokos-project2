@@ -2,10 +2,23 @@ const express = require('express')
 const cors = require('cors')
 const fs = require('fs')
 const { generatePayment } = require('./payment')
+const { handleNewMessage, sendMessageFromAdmin } = require('../api/chat')
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+
+app.post('/api/chat/newMessage', handleNewMessage)
+app.post('/api/chat/sendMessage', sendMessageFromAdmin)
+
+app.get('/api/chat/messages/:user', (req, res) => {
+    const user = req.params.user;
+    const messagesRef = db.ref(`messages/${user}`);
+    messagesRef.once('value', (snapshot) => {
+        const messages = snapshot.val();
+        res.json(messages ? Object.values(messages) : []);
+    });
+});
 
 app.get('/api/produk', (req, res) => {
   const data = JSON.parse(fs.readFileSync(__dirname + '/produk.json'))

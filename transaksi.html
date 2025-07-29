@@ -620,25 +620,7 @@
     </div>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
   <script>
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyAQVIvZvxmYdcriHR8j0ormGzNRjGD0_no",
-      authDomain: "online--suit.firebaseapp.com",
-      databaseURL: "https://online--suit-default-rtdb.firebaseio.com",
-      projectId: "online--suit",
-      storageBucket: "online--suit.appspot.com",
-      messagingSenderId: "463840835705",
-      appId: "1:463840835705:web:f490fd49851c0afb8dfca8"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-    const storage = firebase.storage();
 
     const chatContainer = document.getElementById('chat-container');
     const openChatButton = document.getElementById('open-chat-button');
@@ -656,11 +638,10 @@
         localStorage.setItem('user_wa', currentUserId);
     }
 
-    const messagesRef = database.ref('messages/' + currentUserId);
-
     openChatButton.addEventListener('click', () => {
         chatContainer.style.display = 'flex';
         openChatButton.style.display = 'none';
+        fetchMessages();
     });
 
     closeChatButton.addEventListener('click', () => {
@@ -696,38 +677,32 @@
     function sendMessage(text, imageUrl = null) {
         const message = {
             text: text,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            timestamp: new Date().getTime(),
             sender: 'user'
         };
         if (imageUrl) {
             message.imageUrl = imageUrl;
         }
-        messagesRef.push(message);
+
+        fetch('/api/chat/newMessage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: text, user: currentUserId })
+        });
     }
 
-    function uploadImage(file) {
-        const storageRef = storage.ref('chat_images/' + currentUserId + '/' + Date.now() + '_' + file.name);
-        const uploadTask = storageRef.put(file);
-
-        uploadTask.on('state_changed',
-            (snapshot) => {
-                // Progress
-            },
-            (error) => {
-                console.error("Upload error:", error);
-            },
-            () => {
-                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                    sendMessage('', downloadURL);
+    function fetchMessages() {
+        fetch(`/api/chat/messages/${currentUserId}`)
+            .then(response => response.json())
+            .then(messages => {
+                chatMessages.innerHTML = '';
+                messages.forEach(message => {
+                    displayMessage(message);
                 });
-            }
-        );
+            });
     }
-
-    messagesRef.on('child_added', (snapshot) => {
-        const message = snapshot.val();
-        displayMessage(message);
-    });
 
     function displayMessage(message) {
         const messageElement = document.createElement('div');
