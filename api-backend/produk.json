@@ -3,12 +3,21 @@
     "id": "1",
     "layanan": "WhatsApp",
     "negara": "Jepang",
-    "harga": 1200
+    "harga": 1200,
+    "kualitas": "biasa"
   },
   {
     "id": "2",
     "layanan": "Telegram",
     "negara": "Indonesia",
-    "harga": 1000
+    "harga": 1000,
+    "kualitas": "biasa"
+  },
+  {
+    "id": "3",
+    "layanan": "WhatsApp",
+    "negara": "Amerika Serikat",
+    "harga": 10000,
+    "kualitas": "super"
   }
 ]

@@ -1,18 +1,21 @@
-import db from '../lib/db.js';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).end();
+  const { userId, nama, wa } = req.body;
 
-  const { email, password } = req.body;
-  const [rows] = await db.execute('SELECT * FROM users WHERE email = ?', [email]);
-  const user = rows[0];
-
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ message: 'Login gagal' });
+  if (!userId || !nama || !wa) {
+    return res.status(400).json({ message: 'Data tidak lengkap' });
   }
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+  const user = {
+    id: userId,
+    nama,
+    wa,
+  };
+
+  const token = jwt.sign(user, process.env.JWT_SECRET, {
+    expiresIn: '1d',
+  });
+
   res.status(200).json({ token });
 }

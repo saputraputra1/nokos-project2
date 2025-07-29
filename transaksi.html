@@ -525,6 +525,13 @@
     <div id="ringkasan" class="info-box" style="display:none;"></div>
   </div>
 
+  <div id="spin-container" style="display: none; text-align: center; margin-top: 20px;">
+    <h2>Selamat! Anda mendapatkan kesempatan untuk memutar roda!</h2>
+    <canvas id="spin-wheel" width="300" height="300"></canvas>
+    <button onclick="spin()" style="margin-top: 10px;">Putar</button>
+    <div id="spin-result" style="margin-top: 10px; font-weight: bold;"></div>
+  </div>
+
   <!-- Sticky button for mobile -->
   <div class="sticky-button">
     <button onclick="validateAndSubmit()">Bayar Sekarang</button>
@@ -874,6 +881,18 @@
       
       tampilkanKeteranganKualitas();
       validateKualitas();
+
+      const spinContainer = document.getElementById('spin-container');
+      const selectedKualitas = kualitasSelect.value;
+      const providerData = hargaNokos[provider] || {};
+      const negaraData = providerData[negara] || {};
+      const kualitasData = negaraData.kualitas || {};
+
+      if (selectedKualitas === 'super') {
+        spinContainer.style.display = 'block';
+      } else {
+        spinContainer.style.display = 'none';
+      }
     }
 
     function tampilkanKeteranganKualitas() {
@@ -921,6 +940,98 @@
       // Scroll to summary
       document.getElementById("ringkasan").scrollIntoView({ behavior: 'smooth' });
     }
+
+    const spinContainer = document.getElementById('spin-container');
+    const spinWheel = document.getElementById('spin-wheel');
+    const spinResult = document.getElementById('spin-result');
+    const ctx = spinWheel.getContext('2d');
+
+    const prizes = [
+      { text: 'Nokos Indo (biasa)', color: '#FFC300' },
+      { text: 'Nokos Filipina (premium)', color: '#FF5733' },
+      { text: 'Nokos Telegram Indonesia', color: '#C70039' },
+      { text: 'Nokos Telegram+WhatsApp (Indonesia)', color: '#900C3F' },
+      { text: 'Nokos Filipina+Indonesia+Kenya', color: '#581845' }
+    ];
+
+    const probabilities = [0.4, 0.3, 0.2, 0.09, 0.01];
+
+    let startAngle = 0;
+    const arc = Math.PI / (prizes.length / 2);
+
+    function drawWheel() {
+      ctx.clearRect(0, 0, spinWheel.width, spinWheel.height);
+      ctx.strokeStyle = '#FFFFFF';
+      ctx.lineWidth = 2;
+
+      for (let i = 0; i < prizes.length; i++) {
+        const angle = startAngle + i * arc;
+        ctx.fillStyle = prizes[i].color;
+
+        ctx.beginPath();
+        ctx.arc(150, 150, 150, angle, angle + arc, false);
+        ctx.arc(150, 150, 0, angle + arc, angle, true);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.save();
+        ctx.fillStyle = '#FFFFFF';
+        ctx.translate(150 + Math.cos(angle + arc / 2) * 100, 150 + Math.sin(angle + arc / 2) * 100);
+        ctx.rotate(angle + arc / 2 + Math.PI / 2);
+        const text = prizes[i].text;
+        ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
+        ctx.restore();
+      }
+    }
+
+    async function spin() {
+      const spinButton = document.querySelector('#spin-container button');
+      spinButton.disabled = true;
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Anda harus login untuk memutar.');
+        spinButton.disabled = false;
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/spin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          const spinAngle = Math.random() * 10 + 10; // Random spin angle
+          let currentAngle = 0;
+
+          const spinInterval = setInterval(() => {
+            currentAngle += spinAngle / 100;
+            startAngle += currentAngle;
+            drawWheel();
+
+            if (currentAngle >= spinAngle) {
+              clearInterval(spinInterval);
+              spinResult.textContent = `Selamat! Anda memenangkan: ${data.prize}`;
+            }
+          }, 10);
+        } else {
+          alert(data.message);
+          spinButton.disabled = false;
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat memutar.');
+        spinButton.disabled = false;
+      }
+    }
+
+    drawWheel();
 
     // Make sticky button follow form validation
     document.addEventListener('scroll', function() {

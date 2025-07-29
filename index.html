@@ -70,10 +70,16 @@
         alert("Nama dan WA harus diisi");
         return;
       }
-      // Simpan ke localStorage
+
+      // Generate a unique ID for the user
+      const userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+      // Save user data to localStorage
+      localStorage.setItem("user_id", userId);
       localStorage.setItem("user_nama", nama);
       localStorage.setItem("user_wa", wa);
-      // Pindah ke halaman transaksi
+
+      // Redirect to the transaction page
       window.location.href = "transaksi.html";
     }
   </script>
