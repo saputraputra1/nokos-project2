@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Beli nomor kosong (NOKOS) untuk verifikasi akun berbagai negara dengan harga terjangkau dan kualitas terbaik.">
+  <meta name="keywords" content="nokos, nomor kosong, nomor virtual, verifikasi akun, nomor internasional">
+  <title>Saputra Nokos - Beli Nomor Kosong untuk Verifikasi Akun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Urbanist', sans-serif;
+      background: #0f0c29;
+      color: #fff;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-bottom: 80px; /* Space for sticky button */
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      padding: 25px;
+      animation: fadeInUp 0.5s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      color: #00e5ff;
+      text-shadow: 0 0 10px #00e5ff;
+      margin-bottom: 15px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    .sosmed-btn {
+      display: inline-block;
+      margin: 8px 4px;
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 13px;
+    }
+    .sosmed-btn.wa {
+      background-color: #25D366;
+    }
+    .sosmed-btn.tg {
+      background-color: #0088cc;
+    }
+    .sosmed-btn.ig {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    }
+    .sosmed-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    label {
+      margin-top: 14px;
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .input-group {
+      position: relative;
+      margin-top: 6px;
+    }
+    .input-group i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ccc;
+      font-size: 14px;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px 12px 12px 36px;
+      border-radius: 10px;
+      border: 1px solid #555;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 14px;
+      transition: border 0.3s;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #00e5ff;
+    }
+    input.error {
+      border-color: #ff4444;
+    }
+    .error-message {
+      color: #ff4444;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #00e676;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    button:hover {
+      background: #00c853;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 230, 118, 0.3);
+    }
+    button:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+    .info-box {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 16px;
+      border-left: 4px solid #00e676;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .info-box a {
+      display: inline-block;
+      margin-top: 12px;
+      background: #25d366;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .info-box a:hover {
+      background: #1da851;
+    }
+    .keterangan-kualitas {
+      margin-top: 8px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: none;
+      font-size: 13px;
+    }
+    .keterangan-kualitas.show {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #1a1a2e;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      width: 400px;
+      text-align: center;
+      animation: modalFadeIn 0.3s;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .modal-btn {
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+    }
+    .modal-btn.confirm {
+      background: #00e676;
+      color: #000;
+    }
+    .modal-btn.cancel {
+      background: #ff4444;
+      color: #fff;
+    }
+
+    .tutorial-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .tutorial-slide {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    .tutorial-slide.active {
+      display: block;
+    }
+    .tutorial-slide h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+    .tutorial-slide p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .nav-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .nav-button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .nav-button:hover {
+      background-color: #0056b3;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Sticky button for mobile */
+    .sticky-button {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      background: #0f0c29;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+      z-index: 100;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 15px;
+        padding: 18px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      .sticky-button {
+        display: block;
+      }
+    }
+  
+.teks-berjalan {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  color: #ffeb3b;
+  font-weight: bold;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+  text-shadow: 0 0 5px #ffeb3b;
+  line-height: 0;
+}
+
+.teks-berjalan::before {
+  content: attr(data-text);
+  position: absolute;
+  white-space: nowrap;
+  animation: bolakBalikText 10s ease-in-out infinite alternate;
+}
+
+.teks-berjalan:hover::before,
+.teks-berjalan:active::before {
+  animation-play-state: paused;
+}
+
+@keyframes bolakBalikText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* New Price Warning Style */
+.price-warning {
+  margin: 15px 0;
+  padding: 12px;
+  background: rgba(255, 165, 0, 0.15);
+  border-left: 4px solid #FFA500;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  animation: glow 2s infinite alternate;
+}
+
+.price-warning::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FFA500, transparent);
+  animation: shine 3s infinite;
+}
+
+.price-warning strong {
+  color: #FFA500;
+  display: block;
+  margin-bottom: 5px;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.floating-icon {
+  position: absolute;
+  font-size: 20px;
+  color: rgba(255, 165, 0, 0.5);
+  animation: float 3s ease-in-out infinite;
+}
+
+.floating-icon:nth-child(1) {
+  top: 10px;
+  left: 10px;
+  animation-delay: 0s;
+}
+
+.floating-icon:nth-child(2) {
+  bottom: 10px;
+  right: 10px;
+  animation-delay: 0.5s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(10deg);
+  }
+}
+
+/* Spin Wheel Styles */
+.spin-container {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  border: 2px solid #00e5ff;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+.spin-title {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #00e5ff;
+  text-shadow: 0 0 8px #00e5ff;
+}
+
+.spin-wheel-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.spin-wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 8px solid #333;
+  box-shadow: 0 0 0 8px #222, 0 0 30px rgba(0, 0, 0, 0.8);
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  transform: rotate(0deg);
+}
+
+.spin-section {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  transform-origin: bottom right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.spin-section span {
+  position: relative;
+  transform: rotate(90deg);
+  width: 100%;
+  text-align: center;
+  padding-left: 30px;
+}
+
+.spin-pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 40px;
+  z-index: 10;
+}
+
+.spin-pointer:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #ff4444;
+  filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
+}
+
+.spin-btn {
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: linear-gradient(45deg, #ff00cc, #3333ff);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.spin-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.spin-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.spin-result {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(0, 230, 118, 0.1);
+  border-radius: 10px;
+  border-left: 4px solid #00e676;
+  display: none;
+}
+
+.spin-result h3 {
+  color: #00e676;
+  margin-bottom: 10px;
+}
+
+.spin-result p {
+  margin-bottom: 10px;
+}
+
+/* Login Modal for Spin */
+.spin-login-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.spin-login-content {
+  background: #1a1a2e;
+  padding: 25px;
+  border-radius: 15px;
+  max-width: 90%;
+  width: 350px;
+  text-align: center;
+  animation: modalFadeIn 0.3s;
+  border: 2px solid #00e5ff;
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+.spin-login-title {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #00e5ff;
+}
+
+.spin-login-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 14px;
+}
+
+.spin-login-btn {
+  padding: 12px 25px;
+  margin-top: 15px;
+  background: linear-gradient(45deg, #00e676, #00bcd4);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.spin-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
+}
+
+.spin-login-note {
+  font-size: 12px;
+  margin-top: 15px;
+  color: #aaa;
+}
+
+.device-id-display {
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <h2>Saputra Nokos</h2>
+
+<div class="teks-berjalan" data-text="⚠️ Website ini dalam perkembangan. Untuk nomor yang tidak tersedia, mohon chat admin untuk konfirmasi. 📞">
+</div>
+
+    <!-- Price Warning Box -->
+    <div class="price-warning">
+      <i class="fas fa-exclamation-triangle floating-icon"></i>
+      <i class="fas fa-exclamation-circle floating-icon"></i>
+      <strong>PERHATIAN!</strong>
+      Harga dapat berubah sewaktu-waktu tergantung ketersediaan server dan fluktuasi pasar. Harap konfirmasi stok dan harga terbaru dengan admin sebelum melakukan pembayaran.
+    </div>
+
+    <div class="info-box" style="text-align:center; margin-top:15px;">
+      <button onclick="openTutorialModal()" class="sosmed-btn" style="background-color: #007bff; width: 100%; margin-bottom: 10px;"><i class="fas fa-question-circle"></i> Butuh Bantuan? Lihat Tutorial</button>
+      <p><strong>📲 Bergabung & Ikuti Kami</strong></p>
+      <a href="https://chat.whatsapp.com/KUoGURsIF3Z2WwuUqnQcnS?mode=ac_t" class="sosmed-btn wa" target="_blank">
+        <i class="fab fa-whatsapp"></i> GRUP NOKOS
+      </a>
+      <a href="https://t.me/gotorussia633" class="sosmed-btn tg" target="_blank">
+        <i class="fab fa-telegram"></i> Saluran Telegram
+      </a>
+      <a href="https://www.instagram.com/exrin.633?igsh=MTN6eGdiY3c1aWdnbA==" class="sosmed-btn ig" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+    </div>
+    <div class="info-box">
+      <p><strong>Apa itu NOKOS?</strong><br>
+        NOKOS adalah *nomor kosong* atau *nomor virtual* untuk verifikasi akun, tidak terikat pada SIM fisik.</p>
+      <p>💡 Cocok untuk: membuat akun baru, verifikasi layanan tanpa memakai nomor utama.</p>
+    </div>
+
+    <form id="orderForm">
+      <label for="nama">Nama Sesuai Rekening Anda</label>
+      <div class="input-group">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required>
+        <div class="error-message" id="nama-error">Nama harus diisi</div>
+      </div>
+
+      <label for="provider">Pilih Provider</label>
+      <div class="input-group">
+        <i class="fa-solid fa-server"></i>
+        <select id="provider" onchange="tampilkanNegara()" required>
+          <option value="">-- Pilih Provider --</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="telegram">Telegram</option>
+        </select>
+        <div class="error-message" id="provider-error">Pilih provider</div>
+      </div>
+
+      <label for="negara">Pilih Negara</label>
+      <div class="input-group">
+        <i class="fa-solid fa-globe"></i>
+        <select id="negara" onchange="tampilkanKualitas()" required disabled>
+          <option value="">-- Pilih Negara --</option>
+        </select>
+        <div class="error-message" id="negara-error">Pilih negara</div>
+      </div>
+
+      <label for="kualitas">Pilih Kualitas Nomor</label>
+      <div class="input-group">
+        <i class="fa-solid fa-signal"></i>
+        <select id="kualitas" onchange="tampilkanKeteranganKualitas(); checkSpinEligibility();" required disabled>
+          <option value="">-- Pilih Kualitas --</option>
+        </select>
+        <div class="error-message" id="kualitas-error">Pilih kualitas nomor</div>
+      </div>
+
+      <div id="keterangan-kualitas" class="keterangan-kualitas">
+        <p id="keterangan-text"></p>
+      </div>
+
+      <label for="pembayaran">Metode Pembayaran</label>
+      <div class="input-group">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        <select id="pembayaran" required>
+          <option value="">-- Pilih Metode --</option>
+          <option value="gopay">GoPay</option>
+          <option value="seabank">SeaBank</option>
+          <option value="dana">DANA</option>
+        </select>
+        <div class="error-message" id="pembayaran-error">Pilih metode pembayaran</div>
+      </div>
+
+      <label for="nomor">Nomor Rekening Anda</label>
+      <div class="input-group">
+        <i class="fa-solid fa-address-card"></i>
+        <input type="text" id="nomor" placeholder="Contoh: 089876543210" required>
+        <div class="error-message" id="nomor-error">Nomor harus diisi dan hanya angka</div>
+      </div>
+
+      <button type="button" onclick="validateAndSubmit()" id="submitBtn">
+        <span id="buttonText">Bayar Sekarang</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </form>
+
+    <!-- Spin Wheel Container -->
+    <div id="spinContainer" class="spin-container">
+      <h3 class="spin-title">🎁 SPIN BONUS UNTUK ANDA! 🎁</h3>
+      <p>Anda berhak mendapatkan 1x spin bonus karena membeli nomor kualitas SUPER!</p>
+      
+      <div class="spin-wheel-container">
+        <div class="spin-pointer"></div>
+        <div id="spinWheel" class="spin-wheel"></div>
+      </div>
+      
+      <button id="spinBtn" class="spin-btn" onclick="startSpin()">SPIN SEKARANG!</button>
+      
+      <div id="spinResult" class="spin-result">
+        <h3>🎉 SELAMAT! 🎉</h3>
+        <p id="resultText">Anda mendapatkan: <strong>NOKOS Indonesia (Biasa)</strong></p>
+        <p>Hadiah akan dikirim bersamaan dengan nomor yang Anda beli.</p>
+      </div>
+    </div>
+
+    <div id="ringkasan" class="info-box" style="display:none;"></div>
+  </div>
+
+  <!-- Sticky button for mobile -->
+  <div class="sticky-button">
+    <button onclick="validateAndSubmit()">Bayar Sekarang</button>
+  </div>
+
+  <!-- Tutorial Modal -->
+  <div class="modal" id="tutorialModal">
+    <div class="modal-content">
+      <h2>Tutorial Penggunaan</h2>
+      <div class="tutorial-container">
+        <!-- Langkah 1 -->
+        <div class="tutorial-slide active">
+          <h3>Langkah 1: Isi Formulir Pemesanan</h3>
+          <p>
+            Buka halaman utama dan isi semua kolom pada formulir pemesanan. Pastikan data yang Anda masukkan sudah benar, terutama <strong>Nama Sesuai Rekening</strong> dan <strong>Nomor Rekening Anda</strong>.
+          </p>
+        </div>
+        <!-- Langkah 2 -->
+        <div class="tutorial-slide">
+          <h3>Langkah 2: Lakukan Pembayaran</h3>
+          <p>
+            Setelah Anda menekan tombol "Bayar Sekarang", detail pembayaran akan muncul di bagian bawah halaman. Lakukan pembayaran ke salah satu rekening yang tertera.
+          </p>
+        </div>
+        <!-- Langkah 3 -->
+        <div class="tutorial-slide">
+          <h3>Langkah 3: Konfirmasi Pembayaran</h3>
+          <p>
+            Setelah berhasil melakukan pembayaran, klik tombol <strong>"Kirim ke Admin"</strong> untuk mengkonfirmasi pesanan Anda melalui WhatsApp. Admin akan segera memproses pesanan Anda.
+          </p>
+        </div>
+        <!-- Langkah 4 -->
+        <div class="tutorial-slide">
+          <h3>Tips Agar Nomor Awet & Tidak Cepat Terblokir</h3>
+          <p>
+            Untuk menjaga agar nomor Anda lebih tahan lama, ikuti tips berikut:
+            <ul>
+              <li><strong>Gunakan Seperti Nomor Pribadi:</strong> Lakukan panggilan atau kirim pesan ke teman Anda.</li>
+              <li><strong>Simpan Kontak:</strong> Simpan beberapa nomor di kontak Anda.</li>
+              <li><strong>Hindari Spam:</strong> Jangan mengirim pesan massal atau promosi.</li>
+              <li><strong>Verifikasi Bertahap:</strong> Jika untuk banyak akun, beri jeda waktu.</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-button" onclick="changeSlide(-1)">Sebelumnya</button>
+        <button class="nav-button" onclick="changeSlide(1)">Selanjutnya</button>
+      </div>
+      <button class="modal-btn cancel" onclick="closeTutorialModal()">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal" id="confirmationModal">
+    <div class="modal-content">
+      <h3>Konfirmasi Pesanan</h3>
+      <p id="modalMessage">Apakah data yang Anda masukkan sudah benar?</p>
+      <div class="modal-buttons">
+        <button class="modal-btn confirm" onclick="processPayment()">Ya, Lanjutkan</button>
+        <button class="modal-btn cancel" onclick="closeModal()">Periksa Kembali</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spin Login Modal -->
+  <div class="spin-login-modal" id="spinLoginModal">
+    <div class="spin-login-content">
+      <h3 class="spin-login-title">LOGIN UNTUK SPIN BONUS</h3>
+      <p>Masukkan Device ID Anda untuk mengakses spin bonus:</p>
+      
+      <div class="device-id-display" id="deviceIdDisplay">
+        Device ID Anda: <span id="displayDeviceId"></span>
+      </div>
+      
+      <input type="text" id="spinLoginInput" class="spin-login-input" placeholder="Masukkan Device ID Anda">
+      <button class="spin-login-btn" onclick="verifySpinLogin()">MASUK</button>
+      
+      <p class="spin-login-note">
+        * Device ID unik untuk perangkat Anda dan hanya bisa digunakan 1x spin per pembelian.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const hargaNokos = {
+        whatsapp: {
+            id: { nama: "Indonesia", kualitas: { biasa: "Rp5.000", premium: "Rp8.000", super: "Rp10.000" } },
+            us: { nama: "Amerika Serikat", kualitas: { biasa: "Rp55.000", premium: "Rp80.000", super: "Rp100.000" } },
+            jp: { nama: "Jepang", kualitas: { biasa: "Rp180.000", premium: "Rp260.000", super: "Rp360.000" } },
+            can: { nama: "Canada", kualitas: { biasa: "Rp55.000", premium: "Rp65.000", super: "Rp85.000" } },
+            col: { nama: "Colombia", kualitas: { biasa: "Rp50.000", premium: "Rp60.000", super: "Rp75.000" } },
+            ken: { nama: "Kenya", kualitas: { biasa: "Rp35.000", premium: "Rp45.000", super: "Rp60.000" } },
+            rus: { nama: "Russia", kualitas: { biasa: "Rp65.000", premium: "Rp80.000", super: "Rp105.000" } },
+            viet: { nama: "Vietnam", kualitas: { biasa: "Rp45.000", premium: "Rp60.000", super: "Rp80.000" } },
+            mes: { nama: "Mesir", kualitas: { biasa: "Rp50.000", premium: "Rp60.000", super: "Rp75.000" } },
+            bra: { nama: "Brazil", kualitas: { biasa: "Rp55.000", premium: "Rp65.000", super: "Rp75.000" } },
+            thai: { nama: "Thailand", kualitas: { biasa: "Rp55.000", premium: "Rp70.000", super: "Rp95.000" } },
+            hong: { nama: "Hongkong", kualitas: { biasa: "Rp60.000", premium: "Rp75.000", super: "Rp95.000" } },
+            bel: { nama: "Belanda", kualitas: { biasa: "Rp55.000", premium: "Rp75.000", super: "Rp95.000" } },
+            jer: { nama: "Jerman", kualitas: { biasa: "Rp160.000", premium: "Rp210.000", super: "Rp285.000" } },
+            fil: { nama: "Filipina", kualitas: { biasa: "Rp25.000", premium: "Rp35.000", super: "Rp40.000" } },
+            morr: { nama: "Morocco", kualitas: { biasa: "Rp55.000", premium: "Rp70.000", super: "Rp85.000" } },
+            laos: { nama: "Laos", kualitas: { biasa: "Rp45.000", premium: "Rp60.000", super: "Rp80.000" } },
+            cambodia: { nama: "Cambodia", kualitas: { biasa: "Rp55.000", premium: "Rp70.000", super: "Rp90.000" } },
+            china: { nama: "China", kualitas: { biasa: "Rp50.000", premium: "Rp75.000", super: "Rp105.000" } },
+            malaysia: { nama: "Malaysia", kualitas: { biasa: "Rp55.000", premium: "Rp70.000", super: "Rp85.000" } },
+            singapura: { nama: "Singapura", kualitas: { biasa: "Rp250.000", premium: "Rp400.000", super: "Rp750.000" } }
+        },
+        telegram: {
+            id: { nama: "Indonesia", kualitas: { biasa: "Rp20.000", premium: "Rp23.000", super: "Rp25.000" } },
+            us: { nama: "Amerika Serikat", kualitas: { biasa: "Rp70.000", premium: "Rp95.000", super: "Rp115.000" } },
+            jp: { nama: "Jepang", kualitas: { biasa: "Rp195.000", premium: "Rp275.000", super: "Rp375.000" } },
+            can: { nama: "Canada", kualitas: { biasa: "Rp70.000", premium: "Rp80.000", super: "Rp100.000" } },
+            col: { nama: "Colombia", kualitas: { biasa: "Rp65.000", premium: "Rp75.000", super: "Rp90.000" } },
+            ken: { nama: "Kenya", kualitas: { biasa: "Rp50.000", premium: "Rp60.000", super: "Rp75.000" } },
+            rus: { nama: "Russia", kualitas: { biasa: "Rp80.000", premium: "Rp95.000", super: "Rp120.000" } },
+            viet: { nama: "Vietnam", kualitas: { biasa: "Rp60.000", premium: "Rp75.000", super: "Rp95.000" } },
+            mes: { nama: "Mesir", kualitas: { biasa: "Rp65.000", premium: "Rp75.000", super: "Rp90.000" } },
+            bra: { nama: "Brazil", kualitas: { biasa: "Rp70.000", premium: "Rp80.000", super: "Rp90.000" } },
+            thai: { nama: "Thailand", kualitas: { biasa: "Rp70.000", premium: "Rp85.000", super: "Rp110.000" } },
+            hong: { nama: "Hongkong", kualitas: { biasa: "Rp75.000", premium: "Rp90.000", super: "Rp110.000" } },
+            bel: { nama: "Belanda", kualitas: { biasa: "Rp70.000", premium: "Rp90.000", super: "Rp110.000" } },
+            jer: { nama: "Jerman", kualitas: { biasa: "Rp175.000", premium: "Rp225.000", super: "Rp300.000" } },
+            fil: { nama: "Filipina", kualitas: { biasa: "Rp40.000", premium: "Rp50.000", super: "Rp55.000" } },
+            morr: { nama: "Morocco", kualitas: { biasa: "Rp70.000", premium: "Rp85.000", super: "Rp100.000" } },
+            laos: { nama: "Laos", kualitas: { biasa: "Rp60.000", premium: "Rp75.000", super: "Rp95.000" } },
+            cambodia: { nama: "Cambodia", kualitas: { biasa: "Rp70.000", premium: "Rp85.000", super: "Rp105.000" } },
+            china: { nama: "China", kualitas: { biasa: "Rp65.000", premium: "Rp90.000", super: "Rp120.000" } },
+            malaysia: { nama: "Malaysia", kualitas: { biasa: "Rp70.000", premium: "Rp85.000", super: "Rp100.000" } },
+            singapura: { nama: "Singapura", kualitas: { biasa: "Rp265.000", premium: "Rp415.000", super: "Rp765.000" } }
+        }
+    };
+
+    const rekening = {
+      gopay: { nama: "IZMET", nomor: "0895335107865" },
+      seabank: { nama: "IZMET", nomor: "901444670611" },
+      dana: { nama: "REPIKA", nomor: "085346808546" }
+    };
+
+    const kualitasDescriptions = {
+      biasa: "⭐ Standar, masa aktif terbatas, cocok untuk percobaan cepat.",
+      premium: "⭐⭐ Lebih stabil, masa aktif lebih lama.",
+      super: "⭐⭐⭐ Kualitas terbaik, paling stabil, masa aktif paling panjang.<br>Garansi 2 hari, kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+    };
+
+    // Spin wheel prizes and probabilities
+    const spinPrizes = [
+      { id: 1, name: "NOKOS Indonesia (Biasa)", color: "#FF5252", probability: 20 },
+      { id: 2, name: "NOKOS Filipina (Premium)", color: "#FF9800", probability: 15 },
+      { id: 3, name: "NOKOS Telegram Indonesia", color: "#4CAF50", probability: 10 },
+      { id: 4, name: "NOKOS Telegram+WhatsApp (Indonesia)", color: "#2196F3", probability: 5 },
+      { id: 5, name: "NOKOS Filipina+Indonesia+Kenya", color: "#9C27B0", probability: 0.01 },
+      { id: 6, name: "Coba lagi, beli NOKOS baru untuk mendapatkan bonus", color: "#607D8B", probability: 99.8 },
+      { id: 7, name: "NOKOS Jepang", color: "#E91E63", probability: 0 } // Not obtainable
+    ];
+
+    // Device ID management
+    let deviceId = localStorage.getItem('deviceId');
+    if (!deviceId) {
+      deviceId = generateDeviceId();
+      localStorage.setItem('deviceId', deviceId);
+    }
+
+    // Call initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      setupInputValidation();
+      createSpinWheel();
+    });
+
+    function generateDeviceId() {
+      return 'd-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36);
+    }
+
+    function createSpinWheel() {
+      const wheel = document.getElementById('spinWheel');
+      wheel.innerHTML = '';
+      
+      const sectionAngle = 360 / spinPrizes.length;
+      
+      spinPrizes.forEach((prize, index) => {
+        const section = document.createElement('div');
+        section.className = 'spin-section';
+        section.style.transform = `rotate(${index * sectionAngle}deg)`;
+        section.style.backgroundColor = prize.color;
+        
+        const span = document.createElement('span');
+        span.textContent = prize.name;
+        section.appendChild(span);
+        
+        wheel.appendChild(section);
+      });
+    }
+
+    function checkSpinEligibility() {
+      const provider = document.getElementById('provider').value;
+      const negara = document.getElementById('negara').value;
+      const kualitas = document.getElementById('kualitas').value;
+      const spinContainer = document.getElementById('spinContainer');
+      
+      // Check if eligible for spin (super quality and not Indonesia, Philippines, or Kenya)
+      const isEligible = kualitas === 'super' && 
+                         negara && 
+                         !['id', 'fil', 'ken'].includes(negara) && 
+                         provider;
+      
+      spinContainer.style.display = isEligible ? 'block' : 'none';
+      
+      if (isEligible) {
+        // Scroll to spin container
+        setTimeout(() => {
+          spinContainer.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+      }
+    }
+
+    function showSpinLogin() {
+      document.getElementById('displayDeviceId').textContent = deviceId;
+      document.getElementById('spinLoginModal').style.display = 'flex';
+    }
+
+    function verifySpinLogin() {
+      const input = document.getElementById('spinLoginInput').value.trim();
+      
+      if (input === deviceId) {
+        document.getElementById('spinLoginModal').style.display = 'none';
+        document.getElementById('spinBtn').disabled = false;
+      } else {
+        alert('Device ID tidak valid. Silakan masukkan ID yang benar.');
+      }
+    }
+
+    function startSpin() {
+      const btn = document.getElementById('spinBtn');
+      const wheel = document.getElementById('spinWheel');
+      const resultDiv = document.getElementById('spinResult');
+      const resultText = document.getElementById('resultText');
+      
+      btn.disabled = true;
+      resultDiv.style.display = 'none';
+      
+      // Determine the prize based on probabilities
+      const random = Math.random() * 100;
+      let cumulativeProbability = 0;
+      let selectedPrize = null;
+      
+      for (const prize of spinPrizes) {
+        cumulativeProbability += prize.probability;
+        if (random <= cumulativeProbability) {
+          selectedPrize = prize;
+          break;
+        }
+      }
+      
+      // For the "not obtainable" prize (Japan), default to "try again"
+      if (selectedPrize.id === 7) {
+        selectedPrize = spinPrizes.find(p => p.id === 6);
+      }
+      
+      // Calculate rotation (5 full rotations + prize angle)
+      const sectionAngle = 360 / spinPrizes.length;
+      const prizeIndex = spinPrizes.findIndex(p => p.id === selectedPrize.id);
+      const targetAngle = 5 * 360 + (360 - (prizeIndex * sectionAngle + sectionAngle/2));
+      
+      // Apply rotation
+      wheel.style.transform = `rotate(${targetAngle}deg)`;
+      
+      // Show result after spin completes
+      setTimeout(() => {
+        resultText.innerHTML = `Anda mendapatkan: <strong>${selectedPrize.name}</strong>`;
+        resultDiv.style.display = 'block';
+        
+        // Save that user has used their spin
+        localStorage.setItem('spinUsed', 'true');
+      }, 4000);
+    }
+
+    function showLoading(show) {
+      const spinner = document.getElementById('spinner');
+      const buttonText = document.getElementById('buttonText');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      if (show) {
+        spinner.style.display = 'block';
+        buttonText.style.display = 'none';
+        submitBtn.disabled = true;
+      } else {
+        spinner.style.display = 'none';
+        buttonText.style.display = 'block';
+        submitBtn.disabled = false;
+      }
+    }
+
+    function setupInputValidation() {
+      const nomorInput = document.getElementById('nomor');
+      nomorInput.addEventListener('input', function(e) {
+        // Only allow numbers
+        this.value = this.value.replace(/[^0-9]/g, '');
+        validateNomor();
+      });
+
+      // Add validation for other fields
+      document.getElementById('nama').addEventListener('blur', validateNama);
+      document.getElementById('negara').addEventListener('change', validateNegara);
+      document.getElementById('kualitas').addEventListener('change', validateKualitas);
+      document.getElementById('pembayaran').addEventListener('change', validatePembayaran);
+    }
+
+    function validateNama() {
+      const nama = document.getElementById('nama').value.trim();
+      const errorElement = document.getElementById('nama-error');
+      
+      if (!nama) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateNegara() {
+      const negara = document.getElementById('negara').value;
+      const errorElement = document.getElementById('negara-error');
+      
+      if (!negara) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateKualitas() {
+      const kualitas = document.getElementById('kualitas').value;
+      const errorElement = document.getElementById('kualitas-error');
+      
+      if (!kualitas) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validatePembayaran() {
+      const pembayaran = document.getElementById('pembayaran').value;
+      const errorElement = document.getElementById('pembayaran-error');
+      
+      if (!pembayaran) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateNomor() {
+      const nomor = document.getElementById('nomor').value.trim();
+      const errorElement = document.getElementById('nomor-error');
+      
+      if (!nomor || !/^\d+$/.test(nomor)) {
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function validateAndSubmit() {
+      const isNamaValid = validateNama();
+      const isNegaraValid = validateNegara();
+      const isKualitasValid = validateKualitas();
+      const isPembayaranValid = validatePembayaran();
+      const isNomorValid = validateNomor();
+
+      if (isNamaValid && isNegaraValid && isKualitasValid && isPembayaranValid && isNomorValid) {
+        showConfirmationModal();
+      } else {
+        // Scroll to first error
+        const firstError = document.querySelector('.error-message[style="display: block;"]');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+
+    function showConfirmationModal() {
+      const nama = document.getElementById('nama').value.trim();
+      const negara = document.getElementById('negara').value;
+      const kualitas = document.getElementById('kualitas').value;
+      const pembayaran = document.getElementById('pembayaran').value;
+      
+      const negaraNama = hargaNokos[negara] ? hargaNokos[negara].nama : '';
+      const kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
+      const harga = hargaNokos[negara] ? hargaNokos[negara].kualitas[kualitas] : '';
+      
+      const message = `
+        <p>Nama: <strong>${nama}</strong></p>
+        <p>Negara: <strong>${negaraNama}</strong></p>
+        <p>Kualitas: <strong>${kualitasNama} (${harga})</strong></p>
+        <p>Pembayaran: <strong>${pembayaran.toUpperCase()}</strong></p>
+      `;
+      
+      document.getElementById('modalMessage').innerHTML = message;
+      document.getElementById('confirmationModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('confirmationModal').style.display = 'none';
+    }
+
+    function openTutorialModal() {
+      document.getElementById('tutorialModal').style.display = 'flex';
+    }
+
+    function closeTutorialModal() {
+      document.getElementById('tutorialModal').style.display = 'none';
+    }
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.tutorial-slide');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+
+    function changeSlide(n) {
+      currentSlide = (currentSlide + n + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    showSlide(currentSlide);
+
+    function processPayment() {
+      closeModal();
+      showLoading(true);
+      
+      // Simulate processing delay
+      setTimeout(() => {
+        showLoading(false);
+        bayar();
+      }, 1500);
+    }
+
+    function tampilkanNegara() {
+      const provider = document.getElementById("provider").value;
+      const negaraSelect = document.getElementById("negara");
+
+      negaraSelect.innerHTML = '<option value="">-- Pilih Negara --</option>';
+      negaraSelect.disabled = !provider;
+
+      if (provider && hargaNokos[provider]) {
+        for (let negaraKey in hargaNokos[provider]) {
+          let negaraData = hargaNokos[provider][negaraKey];
+          let opt = document.createElement("option");
+          opt.value = negaraKey;
+          opt.textContent = negaraData.nama;
+          negaraSelect.appendChild(opt);
+        }
+      }
+      tampilkanKualitas();
+    }
+
+    function tampilkanKualitas() {
+      const provider = document.getElementById("provider").value;
+      const negara = document.getElementById("negara").value;
+      const kualitasSelect = document.getElementById("kualitas");
+      
+      kualitasSelect.innerHTML = "";
+      kualitasSelect.disabled = !negara || !provider;
+      
+      if (provider && negara && hargaNokos[provider][negara] && Object.keys(hargaNokos[provider][negara].kualitas).length > 0) {
+        kualitasSelect.disabled = false;
+        kualitasSelect.innerHTML = '<option value="">-- Pilih Kualitas --</option>';
+        
+        for (let tipe in hargaNokos[provider][negara].kualitas) {
+          let opt = document.createElement("option");
+          opt.value = tipe;
+          opt.textContent = `${tipe.charAt(0).toUpperCase() + tipe.slice(1)} - ${hargaNokos[provider][negara].kualitas[tipe]}`;
+          kualitasSelect.appendChild(opt);
+        }
+      } else if (negara) {
+        kualitasSelect.innerHTML = '<option value="">Memuat harga...</option>';
+      }
+      
+      tampilkanKeteranganKualitas();
+      checkSpinEligibility();
+      validateKualitas();
+    }
+
+    function tampilkanKeteranganKualitas() {
+      const kualitas = document.getElementById("kualitas").value;
+      const ketBox = document.getElementById("keterangan-kualitas");
+      const ketText = document.getElementById("keterangan-text");
+      
+      if (kualitas && kualitasDescriptions[kualitas]) {
+        ketText.innerHTML = kualitasDescriptions[kualitas];
+        ketBox.classList.add("show");
+      } else {
+        ketBox.classList.remove("show");
+      }
+    }
+
+    function bayar() {
+      const nama = document.getElementById("nama").value.trim();
+      const provider = document.getElementById("provider").value;
+      const negara = document.getElementById("negara").value;
+      const kualitas = document.getElementById("kualitas").value;
+      const pembayaran = document.getElementById("pembayaran").value;
+      const nomor = document.getElementById("nomor").value.trim();
+
+      const data = hargaNokos[provider][negara];
+      const harga = data.kualitas[kualitas];
+      const kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
+      const providerNama = provider.charAt(0).toUpperCase() + provider.slice(1);
+      const adminWa = "6285647271487";
+      const rek = rekening[pembayaran];
+
+      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}`.trim();
+
+      document.getElementById("ringkasan").innerHTML = `
+        <p><strong>✅ Detail Transaksi:</strong></p>
+        <p>👤 ${nama}<br>Provider: ${providerNama}<br>🌍 ${data.nama}<br>📶 ${kualitasNama}<br>💰 ${harga}<br>🏦 Rekening Anda: ${nomor}<br>💳 ${pembayaran.toUpperCase()}</p>
+        <p>🏦 Silakan transfer ke rekening berikut:</p>
+        <p><strong>${pembayaran.toUpperCase()} - a.n. ${rek.nama}<br>Nomor: ${rek.nomor}</strong></p>
+        <p>📩 Setelah transfer, klik tombol berikut untuk kirim ke Admin via WhatsApp:</p>
+        <a href="https://wa.me/${adminWa}?text=${encodeURIComponent(waPesan)}" target="_blank" class="sosmed-btn wa" style="width:100%;text-align:center;">
+          <i class="fab fa-whatsapp"></i> Kirim ke Admin
+        </a>
+      `;
+      document.getElementById("ringkasan").style.display = "block";
+      
+      // Scroll to summary
+      document.getElementById("ringkasan").scrollIntoView({ behavior: 'smooth' });
+      
+      // Show spin login if eligible
+      const isEligibleForSpin = kualitas === 'super' && !['id', 'fil', 'ken'].includes(negara);
+      if (isEligibleForSpin && !localStorage.getItem('spinUsed')) {
+        setTimeout(() => {
+          showSpinLogin();
+        }, 1000);
+      }
+    }
+
+    // Make sticky button follow form validation
+    document.addEventListener('scroll', function() {
+      const form = document.getElementById('orderForm');
+      const formRect = form.getBoundingClientRect();
+      const stickyBtn = document.querySelector('.sticky-button');
+      
+      if (formRect.bottom < window.innerHeight) {
+        stickyBtn.style.display = 'none';
+      } else {
+        stickyBtn.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
