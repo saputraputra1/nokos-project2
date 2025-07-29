@@ -375,6 +375,120 @@
   }
 }
 
+#chat-container {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 350px;
+  max-width: 90%;
+  background: #1a1a2e;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: column;
+  z-index: 1001;
+}
+
+#chat-header {
+  background: #00e5ff;
+  color: #000;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#chat-header span {
+  font-weight: bold;
+}
+
+#close-chat {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#chat-messages {
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #555;
+}
+
+#message-input {
+  flex-grow: 1;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+#send-button, #upload-button {
+  background: #00e676;
+  border: none;
+  color: #000;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#open-chat-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #00e5ff;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 15px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.chat-message.admin-message {
+  background-color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+.chat-message:not(.admin-message) {
+  background-color: #007bff;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+  color: white;
+}
+
+.timestamp {
+  display: block;
+  font-size: 10px;
+  color: #bbb;
+  margin-top: 4px;
+  text-align: right;
+}
 </style>
 </head>
 <body>
@@ -506,7 +620,142 @@
     </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
   <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQVIvZvxmYdcriHR8j0ormGzNRjGD0_no",
+      authDomain: "online--suit.firebaseapp.com",
+      databaseURL: "https://online--suit-default-rtdb.firebaseio.com",
+      projectId: "online--suit",
+      storageBucket: "online--suit.appspot.com",
+      messagingSenderId: "463840835705",
+      appId: "1:463840835705:web:f490fd49851c0afb8dfca8"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const storage = firebase.storage();
+
+    const chatContainer = document.getElementById('chat-container');
+    const openChatButton = document.getElementById('open-chat-button');
+    const closeChatButton = document.getElementById('close-chat');
+    const sendButton = document.getElementById('send-button');
+    const messageInput = document.getElementById('message-input');
+    const chatMessages = document.getElementById('chat-messages');
+    const uploadButton = document.getElementById('upload-button');
+    const imageUpload = document.getElementById('image-upload');
+
+    let currentUserId = localStorage.getItem('user_wa');
+    if (!currentUserId) {
+        // Fallback to a random ID if user is not logged in
+        currentUserId = 'user_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('user_wa', currentUserId);
+    }
+
+    const messagesRef = database.ref('messages/' + currentUserId);
+
+    openChatButton.addEventListener('click', () => {
+        chatContainer.style.display = 'flex';
+        openChatButton.style.display = 'none';
+    });
+
+    closeChatButton.addEventListener('click', () => {
+        chatContainer.style.display = 'none';
+        openChatButton.style.display = 'block';
+    });
+
+    sendButton.addEventListener('click', () => {
+        const messageText = messageInput.value.trim();
+        if (messageText) {
+            sendMessage(messageText);
+            messageInput.value = '';
+        }
+    });
+
+    messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+
+    uploadButton.addEventListener('click', () => {
+        imageUpload.click();
+    });
+
+    imageUpload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            uploadImage(file);
+        }
+    });
+
+    function sendMessage(text, imageUrl = null) {
+        const message = {
+            text: text,
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            sender: 'user'
+        };
+        if (imageUrl) {
+            message.imageUrl = imageUrl;
+        }
+        messagesRef.push(message);
+    }
+
+    function uploadImage(file) {
+        const storageRef = storage.ref('chat_images/' + currentUserId + '/' + Date.now() + '_' + file.name);
+        const uploadTask = storageRef.put(file);
+
+        uploadTask.on('state_changed',
+            (snapshot) => {
+                // Progress
+            },
+            (error) => {
+                console.error("Upload error:", error);
+            },
+            () => {
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    sendMessage('', downloadURL);
+                });
+            }
+        );
+    }
+
+    messagesRef.on('child_added', (snapshot) => {
+        const message = snapshot.val();
+        displayMessage(message);
+    });
+
+    function displayMessage(message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+        if (message.sender === 'admin') {
+            messageElement.classList.add('admin-message');
+        }
+
+        let content = `<p>${message.text}</p>`;
+        if (message.imageUrl) {
+            content = `<img src="${message.imageUrl}" alt="Image" style="max-width: 200px; border-radius: 5px;">`;
+        }
+
+        messageElement.innerHTML = content + `<span class="timestamp">${new Date(message.timestamp).toLocaleTimeString()}</span>`;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        if (document.hidden && message.sender === 'admin') {
+            new Notification('Pesan Baru dari Admin', {
+                body: message.text || 'Anda menerima gambar.'
+            });
+        }
+    }
+
+    // Request notification permission
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+    }
     // Initialize with default prices
     const hargaNokos = {
       id: { nama: "Indonesia", kualitas: { biasa: "Rp5.000", premium: "Rp8.000", super: "Rp10.000" } },
@@ -788,5 +1037,24 @@
       }
     });
   </script>
+  <div id="chat-container">
+    <div id="chat-header">
+      <span>Chat dengan Admin</span>
+      <button id="close-chat">X</button>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input">
+      <input type="text" id="message-input" placeholder="Ketik pesan...">
+      <button id="send-button">Kirim</button>
+      <input type="file" id="image-upload" accept="image/*" style="display: none;">
+      <button id="upload-button">
+        <i class="fa fa-picture-o" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  <button id="open-chat-button">
+    <i class="fa fa-comment" aria-hidden="true"></i>
+  </button>
 </body>
 </html>
