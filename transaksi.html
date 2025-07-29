@@ -534,6 +534,8 @@
       super: "⭐⭐⭐ Kualitas terbaik, paling stabil, masa aktif paling panjang."
     };
 
+    const garansiDeskripsi = " garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x";
+
     // Call initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
       setupInputValidation();
@@ -715,12 +717,17 @@
     }
 
     function tampilkanKeteranganKualitas() {
+      const negara = document.getElementById("negara").value;
       const kualitas = document.getElementById("kualitas").value;
       const ketBox = document.getElementById("keterangan-kualitas");
       const ketText = document.getElementById("keterangan-text");
       
       if (kualitas && kualitasDescriptions[kualitas]) {
-        ketText.textContent = kualitasDescriptions[kualitas];
+        let deskripsi = kualitasDescriptions[kualitas];
+        if (kualitas === 'super' && negara !== 'id' && negara !== 'fil') {
+          deskripsi += garansiDeskripsi;
+        }
+        ketText.textContent = deskripsi;
         ketBox.classList.add("show");
       } else {
         ketBox.classList.remove("show");
