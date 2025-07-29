@@ -425,6 +425,7 @@
           <option value="">-- Pilih Provider --</option>
           <option value="whatsapp">WhatsApp</option>
           <option value="telegram">Telegram</option>
+          <option value="facebook">Facebook</option>
         </select>
         <div class="error-message" id="provider-error">Pilih provider</div>
       </div>
@@ -543,6 +544,9 @@
             china: { nama: "China", kualitas: { biasa: "Rp65.000", premium: "Rp90.000", super: "Rp120.000" } },
             malaysia: { nama: "Malaysia", kualitas: { biasa: "Rp70.000", premium: "Rp85.000", super: "Rp100.000" } },
             singapura: { nama: "Singapura", kualitas: { biasa: "Rp265.000", premium: "Rp415.000", super: "Rp765.000" } }
+        },
+        facebook: {
+            all: { nama: "All Countries", harga: "Rp25.000" }
         }
     };
 
@@ -716,11 +720,21 @@
     function tampilkanNegara() {
       const provider = document.getElementById("provider").value;
       const negaraSelect = document.getElementById("negara");
+      const kualitasSelect = document.getElementById("kualitas");
 
       negaraSelect.innerHTML = '<option value="">-- Pilih Negara --</option>';
+      kualitasSelect.innerHTML = '<option value="">-- Pilih Kualitas --</option>';
       negaraSelect.disabled = !provider;
+      kualitasSelect.disabled = true;
 
-      if (provider && hargaNokos[provider]) {
+      if (provider === 'facebook') {
+        let opt = document.createElement("option");
+        opt.value = 'all';
+        opt.textContent = 'All Countries';
+        negaraSelect.appendChild(opt);
+        negaraSelect.selectedIndex = 1; // auto-select "All Countries"
+        tampilkanKualitas();
+      } else if (provider && hargaNokos[provider]) {
         for (let negaraKey in hargaNokos[provider]) {
           let negaraData = hargaNokos[provider][negaraKey];
           let opt = document.createElement("option");
@@ -729,7 +743,6 @@
           negaraSelect.appendChild(opt);
         }
       }
-      tampilkanKualitas();
     }
 
     function tampilkanKualitas() {
@@ -740,7 +753,14 @@
       kualitasSelect.innerHTML = "";
       kualitasSelect.disabled = !negara || !provider;
       
-      if (provider && negara && hargaNokos[provider][negara] && Object.keys(hargaNokos[provider][negara].kualitas).length > 0) {
+      if (provider === 'facebook' && negara === 'all') {
+          kualitasSelect.disabled = true;
+          let opt = document.createElement("option");
+          opt.value = 'standard';
+          opt.textContent = `Standard - ${hargaNokos.facebook.all.harga}`;
+          kualitasSelect.appendChild(opt);
+          kualitasSelect.selectedIndex = 1;
+      } else if (provider && negara && hargaNokos[provider][negara] && Object.keys(hargaNokos[provider][negara].kualitas).length > 0) {
         kualitasSelect.disabled = false;
         kualitasSelect.innerHTML = '<option value="">-- Pilih Kualitas --</option>';
         
@@ -779,18 +799,28 @@
       const pembayaran = document.getElementById("pembayaran").value;
       const nomor = document.getElementById("nomor").value.trim();
 
-      const data = hargaNokos[provider][negara];
-      const harga = data.kualitas[kualitas];
-      const kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
+      let data, harga, kualitasNama, negaraNama;
       const providerNama = provider.charAt(0).toUpperCase() + provider.slice(1);
       const adminWa = "6285647271487";
       const rek = rekening[pembayaran];
 
-      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}`.trim();
+      if (provider === 'facebook') {
+        data = hargaNokos.facebook.all;
+        harga = data.harga;
+        kualitasNama = "Standard";
+        negaraNama = "All Countries";
+      } else {
+        data = hargaNokos[provider][negara];
+        harga = data.kualitas[kualitas];
+        kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
+        negaraNama = data.nama;
+      }
+
+      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${negaraNama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}`.trim();
 
       document.getElementById("ringkasan").innerHTML = `
         <p><strong>✅ Detail Transaksi:</strong></p>
-        <p>👤 ${nama}<br>Provider: ${providerNama}<br>🌍 ${data.nama}<br>📶 ${kualitasNama}<br>💰 ${harga}<br>🏦 Rekening Anda: ${nomor}<br>💳 ${pembayaran.toUpperCase()}</p>
+        <p>👤 ${nama}<br>Provider: ${providerNama}<br>🌍 ${negaraNama}<br>📶 ${kualitasNama}<br>💰 ${harga}<br>🏦 Rekening Anda: ${nomor}<br>💳 ${pembayaran.toUpperCase()}</p>
         <p>🏦 Silakan transfer ke rekening berikut:</p>
         <p><strong>${pembayaran.toUpperCase()} - a.n. ${rek.nama}<br>Nomor: ${rek.nomor}</strong></p>
         <p>📩 Setelah transfer, klik tombol berikut untuk kirim ke Admin via WhatsApp:</p>

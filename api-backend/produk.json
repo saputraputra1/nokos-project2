@@ -158,5 +158,11 @@
         "keterangan": "garansi 2 hari,kalau ke spam sebelum 2 hari ganti nomer baru 1x"
       }
     }
+  },
+  {
+    "id": "14",
+    "layanan": "Facebook",
+    "negara": "All",
+    "harga": 25000
   }
 ]
