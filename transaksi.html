@@ -8,6 +8,7 @@
   <title>Saputra Nokos - Beli Nomor Kosong untuk Verifikasi Akun</title>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -345,6 +346,216 @@
   }
 }
 
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  background: rgba(255,255,255,0.05);
+  padding: 6px;
+  border-radius: 14px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 6px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Urbanist', sans-serif;
+}
+.tab-btn.active {
+  background: #00e5ff;
+  color: #000;
+  box-shadow: 0 0 12px rgba(0,229,255,0.4);
+  transform: none;
+}
+.tab-btn:hover:not(.active) {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  transform: none;
+}
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+  animation: fadeInUp 0.4s ease;
+}
+
+/* Jasa Buat Akun Cards */
+.jasa-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.jasa-card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+.jasa-card:hover {
+  border-color: #00e5ff;
+  box-shadow: 0 0 16px rgba(0,229,255,0.15);
+  transform: translateY(-2px);
+}
+.jasa-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.jasa-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.jasa-logo.wechat-logo  { background: linear-gradient(135deg, #07C160, #009A4D); }
+.jasa-logo.vk-logo      { background: linear-gradient(135deg, #2787F5, #0056B3); }
+.jasa-logo.wa-logo      { background: linear-gradient(135deg, #25D366, #128C3D); }
+.jasa-logo.tg-logo      { background: linear-gradient(135deg, #0088cc, #005a8e); }
+.jasa-card-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.jasa-card-subtitle {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 2px;
+}
+.jasa-features {
+  list-style: none;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.jasa-features li {
+  font-size: 13px;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.jasa-features li::before {
+  content: "✓";
+  color: #00e676;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.jasa-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.jasa-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #00e676;
+}
+.jasa-price span {
+  font-size: 11px;
+  color: #aaa;
+  font-weight: normal;
+}
+.jasa-order-btn {
+  width: auto;
+  padding: 8px 16px;
+  background: #00e676;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.jasa-order-btn:hover {
+  background: #00c853;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,230,118,0.3);
+}
+.badge-new {
+  display: inline-block;
+  background: #ff4081;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-left: 6px;
+  vertical-align: middle;
+  animation: pulse 2s infinite;
+}
+.akun-tersedia-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+.akun-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  padding: 14px 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.akun-card:hover {
+  border-color: #00e676;
+  background: rgba(0,230,118,0.08);
+  transform: translateY(-2px);
+}
+.akun-card-icon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+.akun-card-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.akun-card-price {
+  font-size: 12px;
+  color: #00e676;
+  font-weight: bold;
+}
+.akun-card-stock {
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 3px;
+}
+.section-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #00e5ff;
+  margin: 16px 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 /* New Price Warning Style */
 .price-warning {
   margin: 15px 0;
@@ -420,205 +631,585 @@
   }
 }
 
-/* Spin Wheel Styles */
-.spin-container {
-  display: none;
-  text-align: center;
-  margin-top: 20px;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
-  border: 2px solid #00e5ff;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+/* Bukti Transfer */
+.bukti-wrap {
+  margin-top: 18px;
+  animation: fadeInUp 0.5s ease;
 }
-
-.spin-title {
-  font-size: 22px;
-  margin-bottom: 15px;
-  color: #00e5ff;
-  text-shadow: 0 0 8px #00e5ff;
-}
-
-.spin-wheel-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
-}
-
-.spin-wheel {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  position: relative;
+.bukti-card {
+  background: linear-gradient(145deg, #1a1a3e, #16213e);
+  border-radius: 18px;
   overflow: hidden;
-  border: 8px solid #333;
-  box-shadow: 0 0 0 8px #222, 0 0 30px rgba(0, 0, 0, 0.8);
-  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-  transform: rotate(0deg);
+  border: 1px solid rgba(0,229,255,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
-
-.spin-section {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  transform-origin: bottom right;
+.bukti-header {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+  padding: 16px 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
 }
-
-.spin-section span {
-  position: relative;
-  transform: rotate(90deg);
-  width: 100%;
-  text-align: center;
-  padding-left: 30px;
-}
-
-.spin-pointer {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 40px;
-  z-index: 10;
-}
-
-.spin-pointer:before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 30px solid #ff4444;
-  filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.7));
-}
-
-.spin-btn {
-  margin-top: 20px;
-  padding: 12px 30px;
-  background: linear-gradient(45deg, #ff00cc, #3333ff);
-  color: white;
-  border: none;
-  border-radius: 50px;
+.bukti-header-left .bukti-brand {
   font-size: 16px;
   font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.bukti-header-left .bukti-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 2px;
+}
+.bukti-header-right {
+  text-align: right;
+}
+.bukti-status {
+  background: #00e676;
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.bukti-order-id {
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  margin-top: 4px;
+}
+.bukti-body {
+  padding: 18px 20px;
+}
+.bukti-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px;
+  gap: 10px;
+}
+.bukti-row:last-child { border-bottom: none; }
+.bukti-label {
+  color: #aaa;
+  flex-shrink: 0;
+  min-width: 110px;
+}
+.bukti-value {
+  color: #fff;
+  font-weight: 600;
+  text-align: right;
+}
+.bukti-value.highlight {
+  color: #00e676;
+  font-size: 15px;
+}
+.bukti-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), transparent);
+  margin: 4px 0;
+}
+.bukti-tujuan {
+  background: rgba(0,229,255,0.06);
+  border: 1px solid rgba(0,229,255,0.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+.bukti-tujuan-title {
+  font-size: 11px;
+  color: #00e5ff;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.bukti-tujuan-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.bukti-tujuan-row .rek-num {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.copy-btn {
+  background: rgba(0,229,255,0.15);
+  border: 1px solid rgba(0,229,255,0.3);
+  color: #00e5ff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+  width: auto;
 }
-
-.spin-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-.spin-btn:disabled {
-  background: #555;
-  cursor: not-allowed;
+.copy-btn:hover {
+  background: rgba(0,229,255,0.3);
   transform: none;
   box-shadow: none;
 }
-
-.spin-result {
-  margin-top: 20px;
-  padding: 15px;
-  background: rgba(0, 230, 118, 0.1);
-  border-radius: 10px;
-  border-left: 4px solid #00e676;
-  display: none;
-}
-
-.spin-result h3 {
+.copy-btn.copied {
+  background: rgba(0,230,118,0.2);
+  border-color: #00e676;
   color: #00e676;
-  margin-bottom: 10px;
 }
-
-.spin-result p {
-  margin-bottom: 10px;
+.bukti-footer {
+  padding: 14px 20px;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-
-/* Login Modal for Spin */
-.spin-login-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-.spin-login-content {
-  background: #1a1a2e;
-  padding: 25px;
-  border-radius: 15px;
-  max-width: 90%;
-  width: 350px;
+.bukti-timestamp {
+  font-size: 11px;
+  color: #666;
   text-align: center;
-  animation: modalFadeIn 0.3s;
-  border: 2px solid #00e5ff;
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
 }
-
-.spin-login-title {
-  font-size: 22px;
-  margin-bottom: 15px;
-  color: #00e5ff;
-}
-
-.spin-login-input {
-  width: 100%;
+.btn-wa-konfirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #555;
-  background: rgba(255, 255, 255, 0.1);
+  background: #25d366;
   color: #fff;
-  font-size: 14px;
-}
-
-.spin-login-btn {
-  padding: 12px 25px;
-  margin-top: 15px;
-  background: linear-gradient(45deg, #00e676, #00bcd4);
-  color: #000;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  width: 100%;
+}
+.btn-wa-konfirm:hover {
+  background: #1da851;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+}
+.btn-screenshot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(255,255,255,0.07);
+  color: #ccc;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  font-size: 13px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
+  width: 100%;
+}
+.btn-screenshot:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+}
+.bukti-note {
+  font-size: 11px;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
 }
 
-.spin-login-btn:hover {
+/* Tab nav scroll on small screens */
+.tab-nav {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn { flex-shrink: 0; min-width: 90px; }
+
+/* Followers cards */
+.followers-platform-section {
+  margin-bottom: 20px;
+}
+.followers-platform-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.followers-platform-header.ig-header {
+  background: linear-gradient(135deg, rgba(253,212,104,0.15), rgba(253,89,73,0.15), rgba(214,36,159,0.15));
+  border: 1px solid rgba(214,36,159,0.3);
+}
+.followers-platform-header.tiktok-header {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.followers-platform-header.yt-header {
+  background: rgba(255,0,0,0.1);
+  border: 1px solid rgba(255,0,0,0.25);
+}
+.followers-platform-header.fb-header {
+  background: rgba(24,119,242,0.1);
+  border: 1px solid rgba(24,119,242,0.3);
+}
+.followers-platform-icon {
+  font-size: 22px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ig-icon { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.tiktok-icon { background: #000; border: 1px solid #333; }
+.yt-icon { background: #FF0000; }
+.fb-icon { background: #1877F2; }
+.followers-packages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.followers-pkg {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.followers-pkg:hover {
+  border-color: #00e5ff;
+  background: rgba(0,229,255,0.07);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
+  box-shadow: 0 0 14px rgba(0,229,255,0.12);
 }
-
-.spin-login-note {
-  font-size: 12px;
-  margin-top: 15px;
+.followers-pkg.popular::after {
+  content: "POPULER";
+  position: absolute;
+  top: 8px;
+  right: -14px;
+  background: #ff4081;
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 2px 20px;
+  transform: rotate(35deg);
+}
+.followers-pkg-qty {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.followers-pkg-label {
+  font-size: 11px;
   color: #aaa;
+  margin-bottom: 8px;
+}
+.followers-pkg-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #00e676;
+  margin-bottom: 6px;
+}
+.followers-pkg-info {
+  font-size: 10px;
+  color: #888;
+}
+.followers-order-btn {
+  display: block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #00e676;
+  color: #000;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  width: 100%;
+  text-align: center;
+}
+.followers-order-btn:hover {
+  background: #00c853;
+  transform: translateY(-1px);
+}
+.followers-info-note {
+  margin-top: 6px;
+  padding: 10px 12px;
+  background: rgba(0,230,118,0.07);
+  border-left: 3px solid #00e676;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #bbb;
+  line-height: 1.5;
 }
 
-.device-id-display {
-  margin-top: 15px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-  font-size: 14px;
-  word-break: break-all;
+/* ===== DETAIL MODAL SHEET ===== */
+.detail-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 2000;
+  justify-content: center;
+  align-items: flex-end;
 }
+.detail-modal.show { display: flex; }
+.detail-sheet {
+  background: #1a1a2e;
+  border-radius: 22px 22px 0 0;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px 20px 36px;
+  animation: slideUp 0.3s ease;
+  position: relative;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.detail-sheet-handle {
+  width: 40px; height: 4px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+  margin: 0 auto 16px;
+}
+.detail-close-btn {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: #fff;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.detail-close-btn:hover { background: rgba(255,255,255,0.18); transform: none; box-shadow: none; }
+.detail-platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.detail-title { font-size: 20px; font-weight: bold; color: #fff; margin-bottom: 4px; }
+.detail-subtitle { font-size: 13px; color: #aaa; margin-bottom: 10px; }
+.detail-price-highlight { font-size: 28px; font-weight: bold; color: #00e676; margin: 6px 0 14px; }
+.detail-features-list {
+  list-style: none;
+  margin: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.detail-features-list li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: #ccc;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+}
+.detail-order-btn-full {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 14px;
+  background: #00e676; color: #000;
+  border: none; border-radius: 12px;
+  font-size: 15px; font-weight: bold; cursor: pointer;
+  text-decoration: none; transition: all 0.3s; margin-top: 4px;
+}
+.detail-order-btn-full:hover { background: #00c853; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,230,118,0.3); }
+
+/* ===== REVIEW / KOMENTAR ===== */
+.review-section {
+  margin-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 16px;
+}
+.review-section-title {
+  font-size: 14px; font-weight: bold; color: #00e5ff;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+.review-summary {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px; background: rgba(255,255,255,0.04);
+  border-radius: 12px; margin-bottom: 12px;
+}
+.review-big-score { font-size: 38px; font-weight: bold; color: #fff; line-height: 1; }
+.review-stars-row { display: flex; gap: 3px; margin: 4px 0; }
+.star { color: #ffc107; font-size: 13px; }
+.star.empty { color: #444; }
+.review-count-text { font-size: 11px; color: #888; }
+.review-bar-group { flex: 1; }
+.review-bar-row {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 3px; font-size: 11px; color: #aaa;
+}
+.review-bar-track {
+  flex: 1; height: 5px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px; overflow: hidden;
+}
+.review-bar-fill {
+  height: 100%; background: #ffc107;
+  border-radius: 3px; transition: width 0.6s ease;
+}
+.review-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.review-item {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px; padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.review-item-header {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 5px;
+}
+.review-user-info { display: flex; align-items: center; gap: 8px; }
+.review-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: bold; color: #fff; flex-shrink: 0;
+}
+.review-username { font-size: 13px; font-weight: bold; color: #fff; }
+.review-date { font-size: 11px; color: #666; }
+.review-text { font-size: 13px; color: #ccc; line-height: 1.5; margin-top: 5px; }
+.review-platform-tag {
+  font-size: 10px; padding: 2px 8px;
+  border-radius: 10px; font-weight: bold;
+}
+.write-review-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 14px;
+}
+.write-review-title { font-size: 13px; font-weight: bold; color: #fff; margin-bottom: 10px; }
+.star-picker { display: flex; gap: 6px; margin-bottom: 10px; }
+.star-pick {
+  font-size: 24px; cursor: pointer; color: #444;
+  transition: color 0.2s, transform 0.2s; user-select: none;
+}
+.star-pick:hover, .star-pick.selected { color: #ffc107; transform: scale(1.15); }
+.review-input {
+  width: 100%; padding: 10px 12px;
+  border-radius: 8px; border: 1px solid #444;
+  background: rgba(255,255,255,0.05); color: #fff;
+  font-size: 13px; font-family: 'Urbanist', sans-serif;
+  resize: none; margin-bottom: 10px; transition: border 0.2s;
+}
+.review-input:focus { outline: none; border-color: #00e5ff; }
+.review-name-input {
+  width: 100%; padding: 10px 12px;
+  border-radius: 8px; border: 1px solid #444;
+  background: rgba(255,255,255,0.05); color: #fff;
+  font-size: 13px; font-family: 'Urbanist', sans-serif;
+  margin-bottom: 10px; transition: border 0.2s;
+}
+.review-name-input:focus { outline: none; border-color: #00e5ff; }
+.review-submit-btn {
+  width: 100%; padding: 10px;
+  background: #00e5ff; color: #000;
+  border: none; border-radius: 8px;
+  font-size: 13px; font-weight: bold; cursor: pointer; transition: all 0.2s;
+}
+.review-submit-btn:hover { background: #00bcd4; transform: translateY(-1px); }
+.review-success-msg {
+  display: none; text-align: center;
+  padding: 10px; color: #00e676;
+  font-size: 13px; font-weight: bold;
+}
+.review-tab-nav {
+  display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.review-tab-btn {
+  padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px; background: transparent;
+  color: #aaa; font-size: 12px; font-weight: bold;
+  cursor: pointer; transition: all 0.2s; font-family: 'Urbanist', sans-serif;
+}
+.review-tab-btn.active, .review-tab-btn:hover {
+  background: rgba(0,229,255,0.12); border-color: #00e5ff; color: #00e5ff;
+}
+.show-more-btn {
+  width: 100%; padding: 8px;
+  background: transparent; border: 1px solid rgba(255,255,255,0.15);
+  color: #aaa; border-radius: 8px; font-size: 12px;
+  cursor: pointer; margin-top: 4px; transition: all 0.2s; font-family: 'Urbanist', sans-serif;
+}
+.show-more-btn:hover { border-color: #00e5ff; color: #00e5ff; transform: none; box-shadow: none; }
+
+/* Badge PERMANEN */
+.perm-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* Custom paket */
+.custom-pkg {
+  background: rgba(0,229,255,0.05) !important;
+  border: 1px dashed rgba(0,229,255,0.35) !important;
+  cursor: default !important;
+  padding: 16px 14px !important;
+}
+.custom-pkg:hover {
+  border-color: #00e5ff !important;
+  background: rgba(0,229,255,0.08) !important;
+  transform: none !important;
+}
+.custom-qty-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Urbanist', sans-serif;
+  margin-bottom: 6px;
+  transition: border 0.2s;
+}
+.custom-qty-input:focus { outline: none; border-color: #00e5ff; }
+.custom-qty-input::placeholder { color: #777; }
+.custom-price-display {
+  font-size: 13px;
+  color: #aaa;
+  min-height: 20px;
+  margin-bottom: 2px;
+  transition: color 0.2s;
+}
+.custom-price-display.has-price { color: #00e676; font-weight: bold; font-size: 15px; }
 
 </style>
 </head>
@@ -656,6 +1247,16 @@
       <p>💡 Cocok untuk: membuat akun baru, verifikasi layanan tanpa memakai nomor utama.</p>
     </div>
 
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('nokos')">📱 Beli NOKOS</button>
+      <button class="tab-btn" onclick="switchTab('jasa')">🛠️ Jasa Buat Akun</button>
+      <button class="tab-btn" onclick="switchTab('akun')">🛒 Beli Akun Jadi</button>
+      <button class="tab-btn" onclick="switchTab('followers')">👥 Jasa Followers</button>
+    </div>
+
+    <!-- Panel 1: Beli NOKOS (Form lama) -->
+    <div id="tab-nokos" class="tab-panel active">
     <form id="orderForm">
       <label for="nama">Nama Sesuai Rekening Anda</label>
       <div class="input-group">
@@ -687,7 +1288,7 @@
       <label for="kualitas">Pilih Kualitas Nomor</label>
       <div class="input-group">
         <i class="fa-solid fa-signal"></i>
-        <select id="kualitas" onchange="tampilkanKeteranganKualitas(); checkSpinEligibility();" required disabled>
+        <select id="kualitas" onchange="tampilkanKeteranganKualitas()" required disabled>
           <option value="">-- Pilih Kualitas --</option>
         </select>
         <div class="error-message" id="kualitas-error">Pilih kualitas nomor</div>
@@ -722,26 +1323,443 @@
       </button>
     </form>
 
-    <!-- Spin Wheel Container -->
-    <div id="spinContainer" class="spin-container">
-      <h3 class="spin-title">🎁 SPIN BONUS UNTUK ANDA! 🎁</h3>
-      <p>Anda berhak mendapatkan 1x spin bonus karena membeli nomor kualitas SUPER!</p>
-      
-      <div class="spin-wheel-container">
-        <div class="spin-pointer"></div>
-        <div id="spinWheel" class="spin-wheel"></div>
-      </div>
-      
-      <button id="spinBtn" class="spin-btn" onclick="startSpin()" disabled>SPIN SEKARANG!</button>
-      
-      <div id="spinResult" class="spin-result">
-        <h3>🎉 SELAMAT! 🎉</h3>
-        <p id="resultText">Anda mendapatkan: <strong>NOKOS Indonesia (Biasa)</strong></p>
-        <p>Hadiah akan dikirim bersamaan dengan nomor yang Anda beli.</p>
-      </div>
-    </div>
-
     <div id="ringkasan" class="info-box" style="display:none;"></div>
+    </div> <!-- end tab-nokos -->
+
+    <!-- Panel 2: Jasa Buat Akun -->
+    <div id="tab-jasa" class="tab-panel">
+      <div class="jasa-grid">
+
+        <!-- WeChat -->
+        <div class="jasa-card">
+          <div class="jasa-card-header">
+            <div class="jasa-logo wechat-logo">💬</div>
+            <div>
+              <div class="jasa-card-title">Jasa Buat Akun WeChat <span class="badge-new">BARU</span></div>
+              <div class="jasa-card-subtitle">Akun aktif siap pakai, verifikasi nomor asing</div>
+            </div>
+          </div>
+          <div style="margin:8px 0 4px;padding:8px 10px;background:rgba(0,229,255,0.08);border-left:3px solid #00e5ff;border-radius:6px;font-size:12px;color:#00e5ff;">
+            📱 <strong>Bisa pakai nomor sendiri</strong> — minta admin daftarkan akun dengan nomor HP kamu
+          </div>
+          <ul class="jasa-features">
+            <li>Akun fresh, belum pernah dipakai</li>
+            <li>Profil lengkap (nama, foto opsional)</li>
+            <li>Bisa tambah kontak & kirim pesan langsung</li>
+            <li>Proses selesai dalam 1×24 jam</li>
+            <li>Garansi akun aktif 3 hari</li>
+          </ul>
+          <div class="jasa-price-row">
+            <div class="jasa-price">Rp 65.000 <span>/ akun</span></div>
+            <a href="https://wa.me/62895335107865?text=Halo+admin%2C+saya+mau+pesan+Jasa+Buat+Akun+WeChat" target="_blank" class="jasa-order-btn">
+              <i class="fab fa-whatsapp"></i> Pesan
+            </a>
+          </div>
+        </div>
+
+        <!-- VKontakte -->
+        <div class="jasa-card">
+          <div class="jasa-card-header">
+            <div class="jasa-logo vk-logo">🔵</div>
+            <div>
+              <div class="jasa-card-title">Jasa Buat Akun VKontakte <span class="badge-new">BARU</span></div>
+              <div class="jasa-card-subtitle">Akun VK aktif, nomor Russia / internasional</div>
+            </div>
+          </div>
+          <div style="margin:8px 0 4px;padding:8px 10px;background:rgba(0,229,255,0.08);border-left:3px solid #00e5ff;border-radius:6px;font-size:12px;color:#00e5ff;">
+            📱 <strong>Bisa pakai nomor sendiri</strong> — minta admin daftarkan akun dengan nomor HP kamu
+          </div>
+          <ul class="jasa-features">
+            <li>Akun fresh, email terverifikasi</li>
+            <li>Profil dasar sudah diisi</li>
+            <li>Bisa langsung posting & bergabung grup</li>
+            <li>Proses selesai dalam 1×24 jam</li>
+            <li>Garansi akun aktif 3 hari</li>
+          </ul>
+          <div class="jasa-price-row">
+            <div class="jasa-price">Rp 55.000 <span>/ akun</span></div>
+            <a href="https://wa.me/62895335107865?text=Halo+admin%2C+saya+mau+pesan+Jasa+Buat+Akun+VKontakte" target="_blank" class="jasa-order-btn">
+              <i class="fab fa-whatsapp"></i> Pesan
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <p style="font-size:12px;color:#888;margin-top:14px;text-align:center;">* Harga dapat berubah. Konfirmasi stok ke admin sebelum order.</p>
+    </div> <!-- end tab-jasa -->
+
+    <!-- Panel 3: Beli Akun Jadi -->
+    <div id="tab-akun" class="tab-panel">
+      <div class="price-warning" style="margin-top:0;">
+        <i class="fas fa-store floating-icon"></i>
+        <strong>Akun Siap Pakai</strong>
+        Akun sudah jadi & terverifikasi. Langsung bisa digunakan. Stok terbatas — konfirmasi ke admin dulu sebelum bayar.
+      </div>
+
+      <div class="section-label">💬 Akun WeChat</div>
+      <div class="akun-tersedia-grid">
+        <div class="akun-card" onclick="pesanAkun('WeChat China')">
+          <div class="akun-card-icon">🇨🇳</div>
+          <div class="akun-card-name">WeChat China</div>
+          <div class="akun-card-price">Rp 150.000</div>
+          <div class="akun-card-stock">Stok: terbatas</div>
+        </div>
+        <div class="akun-card" onclick="pesanAkun('WeChat Malaysia')">
+          <div class="akun-card-icon">🇲🇾</div>
+          <div class="akun-card-name">WeChat Malaysia</div>
+          <div class="akun-card-price">Rp 110.000</div>
+          <div class="akun-card-stock">Stok: tersedia</div>
+        </div>
+        <div class="akun-card" onclick="pesanAkun('WeChat Amerika')">
+          <div class="akun-card-icon">🇺🇸</div>
+          <div class="akun-card-name">WeChat Amerika</div>
+          <div class="akun-card-price">Rp 175.000</div>
+          <div class="akun-card-stock">Stok: terbatas</div>
+        </div>
+        <div class="akun-card" onclick="pesanAkun('WeChat Hongkong')">
+          <div class="akun-card-icon">🇭🇰</div>
+          <div class="akun-card-name">WeChat Hongkong</div>
+          <div class="akun-card-price">Rp 130.000</div>
+          <div class="akun-card-stock">Stok: tersedia</div>
+        </div>
+        <div class="akun-card" onclick="pesanAkun('WeChat Thailand')">
+          <div class="akun-card-icon">🇹🇭</div>
+          <div class="akun-card-name">WeChat Thailand</div>
+          <div class="akun-card-price">Rp 115.000</div>
+          <div class="akun-card-stock">Stok: tersedia</div>
+        </div>
+      </div>
+
+      <div class="section-label">🔵 Akun VKontakte</div>
+      <div class="akun-tersedia-grid">
+        <div class="akun-card" onclick="pesanAkun('VK Russia')">
+          <div class="akun-card-icon">🇷🇺</div>
+          <div class="akun-card-name">VK Russia</div>
+          <div class="akun-card-price">Rp 100.000</div>
+          <div class="akun-card-stock">Stok: tersedia</div>
+        </div>
+        <div class="akun-card" onclick="pesanAkun('VK Ukraina')">
+          <div class="akun-card-icon">🇺🇦</div>
+          <div class="akun-card-name">VK Ukraina</div>
+          <div class="akun-card-price">Rp 85.000</div>
+          <div class="akun-card-stock">Stok: tersedia</div>
+        </div>
+        <div class="akun-card" onclick="pesanAkun('VK Kazakhstan')">
+          <div class="akun-card-icon">🇰🇿</div>
+          <div class="akun-card-name">VK Kazakhstan</div>
+          <div class="akun-card-price">Rp 80.000</div>
+          <div class="akun-card-stock">Stok: terbatas</div>
+        </div>
+        <div class="akun-card" onclick="pesanAkun('VK Polandia')">
+          <div class="akun-card-icon">🇵🇱</div>
+          <div class="akun-card-name">VK Polandia</div>
+          <div class="akun-card-price">Rp 90.000</div>
+          <div class="akun-card-stock">Stok: tersedia</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px;color:#888;margin-top:14px;text-align:center;">* Klik kartu untuk langsung chat admin via WhatsApp.</p>
+    </div> <!-- end tab-akun -->
+
+    <!-- Panel 4: Jasa Followers -->
+    <div id="tab-followers" class="tab-panel">
+
+      <div class="price-warning" style="margin-top:0;">
+        <i class="fas fa-users floating-icon"></i>
+        <strong>Jasa Tambah Followers</strong>
+        Tingkatkan kredibilitas akun kamu dengan followers berkualitas. Proses cepat, aman & tanpa password. Konfirmasi stok ke admin sebelum order.
+      </div>
+
+      <!-- Instagram -->
+      <div class="followers-platform-section">
+        <div class="followers-platform-header ig-header">
+          <div class="followers-platform-icon ig-icon"><i class="fab fa-instagram" style="color:#fff;font-size:18px;"></i></div>
+          <div>Instagram Followers <span class="badge-new">HITS</span></div>
+        </div>
+        <div class="followers-info-note">✅ Followers <strong style="color:#00e676;">PERMANEN</strong> &nbsp;|&nbsp; ⚡ Mulai dalam 1–6 jam &nbsp;|&nbsp; 🔒 Tanpa password &nbsp;|&nbsp; ♾️ Tidak drop</div>
+        <div class="followers-packages" style="margin-top:10px;">
+
+          <div class="followers-pkg" onclick="pesanFollowers('Instagram 1.000 Followers','Rp 25.000')">
+            <div class="perm-badge">♾️ PERMANEN</div>
+            <div class="followers-pkg-qty">1.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 25.000</div>
+            <div class="followers-pkg-info">Tidak drop selamanya</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('instagram','1.000','Rp 25.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+
+          <div class="followers-pkg popular" onclick="pesanFollowers('Instagram 5.000 Followers','Rp 85.000')">
+            <div class="perm-badge">♾️ PERMANEN</div>
+            <div class="followers-pkg-qty">5.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 85.000</div>
+            <div class="followers-pkg-info">Tidak drop selamanya</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('instagram','5.000','Rp 85.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+
+          <div class="followers-pkg" onclick="pesanFollowers('Instagram 10.000 Followers','Rp 150.000')">
+            <div class="perm-badge">♾️ PERMANEN</div>
+            <div class="followers-pkg-qty">10.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 150.000</div>
+            <div class="followers-pkg-info">Tidak drop selamanya</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('instagram','10.000','Rp 150.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+
+          <div class="followers-pkg" onclick="pesanFollowers('Instagram 50.000 Followers','Rp 500.000')">
+            <div class="perm-badge">♾️ PERMANEN</div>
+            <div class="followers-pkg-qty">50.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 500.000</div>
+            <div class="followers-pkg-info">Tidak drop selamanya</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('instagram','50.000','Rp 500.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+
+          <!-- Custom Instagram -->
+          <div class="followers-pkg custom-pkg" style="grid-column:1/-1;" onclick="event.stopPropagation()">
+            <div class="perm-badge">♾️ PERMANEN</div>
+            <div class="followers-pkg-qty" style="font-size:18px;">⚙️ Custom</div>
+            <div class="followers-pkg-label" style="margin-bottom:10px;">Jumlah sesuka kamu</div>
+            <input type="number" id="ig-custom-qty" class="custom-qty-input" placeholder="Masukkan jumlah followers..." min="100" step="100" onclick="event.stopPropagation()">
+            <div class="custom-price-display" id="ig-custom-price">Ketik jumlah untuk lihat estimasi harga</div>
+            <div style="display:flex;gap:5px;margin-top:10px;">
+              <button class="followers-order-btn" style="flex:1;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);" onclick="event.stopPropagation();hitungCustomIG()">🔢 Hitung Harga</button>
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();pesanCustomIG()"><i class="fab fa-whatsapp"></i> Pesan Custom</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TikTok -->
+      <div class="followers-platform-section">
+        <div class="followers-platform-header tiktok-header">
+          <div class="followers-platform-icon tiktok-icon"><i class="fab fa-tiktok" style="color:#fff;font-size:18px;"></i></div>
+          <div>TikTok Followers</div>
+        </div>
+        <div class="followers-info-note">✅ Followers aktif &nbsp;|&nbsp; ⚡ Mulai dalam 1–12 jam &nbsp;|&nbsp; 🔒 Tanpa password</div>
+        <div class="followers-packages" style="margin-top:10px;">
+          <div class="followers-pkg" onclick="pesanFollowers('TikTok 1.000 Followers','Rp 12.000')">
+            <div class="followers-pkg-qty">1.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 12.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('tiktok','1.000','Rp 12.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg popular" onclick="pesanFollowers('TikTok 5.000 Followers','Rp 50.000')">
+            <div class="followers-pkg-qty">5.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 50.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('tiktok','5.000','Rp 50.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg" onclick="pesanFollowers('TikTok 10.000 Followers','Rp 90.000')">
+            <div class="followers-pkg-qty">10.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 90.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('tiktok','10.000','Rp 90.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg" onclick="pesanFollowers('TikTok 50.000 Followers','Rp 380.000')">
+            <div class="followers-pkg-qty">50.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 380.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('tiktok','50.000','Rp 380.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="followers-platform-section">
+        <div class="followers-platform-header yt-header">
+          <div class="followers-platform-icon yt-icon"><i class="fab fa-youtube" style="color:#fff;font-size:18px;"></i></div>
+          <div>YouTube Subscribers</div>
+        </div>
+        <div class="followers-info-note">✅ Subscriber aktif &nbsp;|&nbsp; ⚡ Mulai dalam 6–24 jam &nbsp;|&nbsp; 🔒 Tanpa password</div>
+        <div class="followers-packages" style="margin-top:10px;">
+          <div class="followers-pkg" onclick="pesanFollowers('YouTube 500 Subscriber','Rp 25.000')">
+            <div class="followers-pkg-qty">500</div>
+            <div class="followers-pkg-label">Subscribers</div>
+            <div class="followers-pkg-price">Rp 25.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('youtube','500','Rp 25.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg popular" onclick="pesanFollowers('YouTube 1.000 Subscriber','Rp 45.000')">
+            <div class="followers-pkg-qty">1.000</div>
+            <div class="followers-pkg-label">Subscribers</div>
+            <div class="followers-pkg-price">Rp 45.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('youtube','1.000','Rp 45.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg" onclick="pesanFollowers('YouTube 5.000 Subscriber','Rp 200.000')">
+            <div class="followers-pkg-qty">5.000</div>
+            <div class="followers-pkg-label">Subscribers</div>
+            <div class="followers-pkg-price">Rp 200.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('youtube','5.000','Rp 200.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg" onclick="pesanFollowers('YouTube 10.000 Subscriber','Rp 350.000')">
+            <div class="followers-pkg-qty">10.000</div>
+            <div class="followers-pkg-label">Subscribers</div>
+            <div class="followers-pkg-price">Rp 350.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('youtube','10.000','Rp 350.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facebook -->
+      <div class="followers-platform-section">
+        <div class="followers-platform-header fb-header">
+          <div class="followers-platform-icon fb-icon"><i class="fab fa-facebook-f" style="color:#fff;font-size:18px;"></i></div>
+          <div>Facebook Followers / Like Page</div>
+        </div>
+        <div class="followers-info-note">✅ Followers & like page aktif &nbsp;|&nbsp; ⚡ Mulai dalam 1–12 jam &nbsp;|&nbsp; 🔒 Tanpa password</div>
+        <div class="followers-packages" style="margin-top:10px;">
+          <div class="followers-pkg" onclick="pesanFollowers('Facebook 1.000 Followers','Rp 18.000')">
+            <div class="followers-pkg-qty">1.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 18.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('facebook','1.000','Rp 18.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg popular" onclick="pesanFollowers('Facebook 5.000 Followers','Rp 75.000')">
+            <div class="followers-pkg-qty">5.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 75.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('facebook','5.000','Rp 75.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg" onclick="pesanFollowers('Facebook 10.000 Followers','Rp 135.000')">
+            <div class="followers-pkg-qty">10.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 135.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('facebook','10.000','Rp 135.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+          <div class="followers-pkg" onclick="pesanFollowers('Facebook 50.000 Followers','Rp 550.000')">
+            <div class="followers-pkg-qty">50.000</div>
+            <div class="followers-pkg-label">Followers</div>
+            <div class="followers-pkg-price">Rp 550.000</div>
+            <div class="followers-pkg-info">Garansi 7 hari</div>
+            <div style="display:flex;gap:5px;margin-top:8px;">
+              <button class="followers-order-btn" style="flex:1;" onclick="event.stopPropagation();lihatDetail('facebook','50.000','Rp 550.000')">👁 Detail</button>
+              <a class="followers-order-btn" style="flex:1;"><i class="fab fa-whatsapp"></i> Pesan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:12px;color:#888;margin-top:6px;text-align:center;">* Harga dapat berubah. Konfirmasi ke admin sebelum order. Klik paket untuk langsung chat admin.</p>
+
+      <!-- ===== ULASAN PELANGGAN ===== -->
+      <div class="review-section">
+        <div class="review-section-title">⭐ Ulasan Pelanggan</div>
+
+        <!-- Ringkasan skor -->
+        <div class="review-summary">
+          <div>
+            <div class="review-big-score" id="avgScore">4.8</div>
+            <div class="review-stars-row" id="avgStars"></div>
+            <div class="review-count-text" id="reviewCount">dari 0 ulasan</div>
+          </div>
+          <div class="review-bar-group" id="ratingBars"></div>
+        </div>
+
+        <!-- Filter platform -->
+        <div class="review-tab-nav" id="reviewFilterNav">
+          <button class="review-tab-btn active" onclick="filterReviews('semua',this)">Semua</button>
+          <button class="review-tab-btn" onclick="filterReviews('instagram',this)">Instagram</button>
+          <button class="review-tab-btn" onclick="filterReviews('tiktok',this)">TikTok</button>
+          <button class="review-tab-btn" onclick="filterReviews('youtube',this)">YouTube</button>
+          <button class="review-tab-btn" onclick="filterReviews('facebook',this)">Facebook</button>
+        </div>
+
+        <!-- Daftar ulasan -->
+        <div class="review-list" id="reviewList"></div>
+        <button class="show-more-btn" id="showMoreBtn" onclick="tampilkanLebihBanyak()">Lihat lebih banyak...</button>
+
+        <!-- Form tulis ulasan -->
+        <div class="write-review-box" style="margin-top:16px;">
+          <div class="write-review-title">✍️ Tulis Ulasan Kamu</div>
+          <input class="review-name-input" id="reviewName" placeholder="Nama kamu (contoh: Budi S.)">
+          <select class="review-name-input" id="reviewPlatform" style="appearance:none;-webkit-appearance:none;">
+            <option value="">-- Pilih platform --</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="youtube">YouTube</option>
+            <option value="facebook">Facebook</option>
+          </select>
+          <div class="star-picker" id="starPicker">
+            <span class="star-pick" data-val="1" onclick="pilihBintang(1)">★</span>
+            <span class="star-pick" data-val="2" onclick="pilihBintang(2)">★</span>
+            <span class="star-pick" data-val="3" onclick="pilihBintang(3)">★</span>
+            <span class="star-pick" data-val="4" onclick="pilihBintang(4)">★</span>
+            <span class="star-pick" data-val="5" onclick="pilihBintang(5)">★</span>
+          </div>
+          <textarea class="review-input" id="reviewText" rows="3" placeholder="Ceritakan pengalamanmu..."></textarea>
+          <button class="review-submit-btn" onclick="kirimUlasan()">Kirim Ulasan</button>
+          <div class="review-success-msg" id="reviewSuccess">✅ Ulasan berhasil dikirim! Terima kasih 🎉</div>
+        </div>
+      </div>
+
+    </div> <!-- end tab-followers -->
+
+  </div>
+
+  <!-- ===== DETAIL MODAL SHEET ===== -->
+  <div class="detail-modal" id="detailModal" onclick="tutupDetailModal(event)">
+    <div class="detail-sheet" id="detailSheet">
+      <div class="detail-sheet-handle"></div>
+      <button class="detail-close-btn" onclick="tutupDetailModal()">✕</button>
+      <div id="detailContent"></div>
+    </div>
   </div>
 
   <!-- Sticky button for mobile -->
@@ -809,39 +1827,20 @@
     </div>
   </div>
 
-  <!-- Spin Login Modal -->
-  <div class="spin-login-modal" id="spinLoginModal">
-    <div class="spin-login-content">
-      <h3 class="spin-login-title">LOGIN UNTUK SPIN BONUS</h3>
-      <p>Masukkan Device ID Anda untuk mengakses spin bonus:</p>
-      
-      <div class="device-id-display" id="deviceIdDisplay">
-        Device ID Anda: <span id="displayDeviceId"></span>
-      </div>
-      
-      <input type="text" id="spinLoginInput" class="spin-login-input" placeholder="Masukkan Device ID Anda">
-      <button class="spin-login-btn" onclick="verifySpinLogin()">MASUK</button>
-      
-      <p class="spin-login-note">
-        * Device ID unik untuk perangkat Anda dan hanya bisa digunakan 1x spin per pembelian.
-      </p>
-    </div>
-  </div>
-
   <script>
     const hargaNokos = {
         whatsapp: {
-            id: { nama: "Indonesia", kualitas: { biasa: "Rp5.000", premium: "Rp8.000", super: "Rp10.000" } },
-            us: { nama: "Amerika Serikat", kualitas: { biasa: "Rp55.000", premium: "Rp80.000", super: "Rp100.000" } },
-            jp: { nama: "Jepang", kualitas: { biasa: "Rp180.000", premium: "Rp260.000", super: "Rp360.000" } },
+            id: { nama: "Indonesia", kualitas: { biasa: "Rp10.000", premium: "Rp15.000", super: "Rp20.000" } },
+            us: { nama: "Amerika Serikat", kualitas: { biasa: "R85.000", premium: "Rp110.000", super: "Rp150.000" } },
+            jp: { nama: "Jepang", kualitas: { biasa: "Rp250.000", premium: "Rp320.000", super: "Rp380.000" } },
             can: { nama: "Canada", kualitas: { biasa: "Rp55.000", premium: "Rp65.000", super: "Rp85.000" } },
             col: { nama: "Colombia", kualitas: { biasa: "Rp50.000", premium: "Rp60.000", super: "Rp75.000" } },
             ken: { nama: "Kenya", kualitas: { biasa: "Rp35.000", premium: "Rp45.000", super: "Rp60.000" } },
-            rus: { nama: "Russia", kualitas: { biasa: "Rp65.000", premium: "Rp80.000", super: "Rp105.000" } },
+            rus: { nama: "Russia", kualitas: { biasa: "Rp100.000", premium: "Rp120.000", super: "Rp170.000" } },
             viet: { nama: "Vietnam", kualitas: { biasa: "Rp45.000", premium: "Rp60.000", super: "Rp80.000" } },
             mes: { nama: "Mesir", kualitas: { biasa: "Rp50.000", premium: "Rp60.000", super: "Rp75.000" } },
-            bra: { nama: "Brazil", kualitas: { biasa: "Rp55.000", premium: "Rp65.000", super: "Rp75.000" } },
-            thai: { nama: "Thailand", kualitas: { biasa: "Rp55.000", premium: "Rp70.000", super: "Rp95.000" } },
+            bra: { nama: "Brazil", kualitas: { biasa: "Rp75.000", premium: "Rp95.000", super: "Rp125.000" } },
+            thai: { nama: "Thailand", kualitas: { biasa: "Rp55.000", premium: "Rp75.000", super: "Rp95.000" } },
             hong: { nama: "Hongkong", kualitas: { biasa: "Rp60.000", premium: "Rp75.000", super: "Rp95.000" } },
             bel: { nama: "Belanda", kualitas: { biasa: "Rp55.000", premium: "Rp75.000", super: "Rp95.000" } },
             jer: { nama: "Jerman", kualitas: { biasa: "Rp160.000", premium: "Rp210.000", super: "Rp285.000" } },
@@ -850,7 +1849,7 @@
             laos: { nama: "Laos", kualitas: { biasa: "Rp45.000", premium: "Rp60.000", super: "Rp80.000" } },
             cambodia: { nama: "Cambodia", kualitas: { biasa: "Rp55.000", premium: "Rp70.000", super: "Rp90.000" } },
             china: { nama: "China", kualitas: { biasa: "Rp50.000", premium: "Rp75.000", super: "Rp105.000" } },
-            malaysia: { nama: "Malaysia", kualitas: { biasa: "Rp55.000", premium: "Rp70.000", super: "Rp85.000" } },
+            malaysia: { nama: "Malaysia", kualitas: { biasa: "Rp75.000", premium: "Rp85.000", super: "Rp115.000" } },
             singapura: { nama: "Singapura", kualitas: { biasa: "Rp250.000", premium: "Rp400.000", super: "Rp750.000" } }
         },
         telegram: {
@@ -874,158 +1873,278 @@
             cambodia: { nama: "Cambodia", kualitas: { biasa: "Rp70.000", premium: "Rp85.000", super: "Rp105.000" } },
             china: { nama: "China", kualitas: { biasa: "Rp65.000", premium: "Rp90.000", super: "Rp120.000" } },
             malaysia: { nama: "Malaysia", kualitas: { biasa: "Rp70.000", premium: "Rp85.000", super: "Rp100.000" } },
-            singapura: { nama: "Singapura", kualitas: { biasa: "Rp265.000", premium: "Rp415.000", super: "Rp765.000" } },
-           korsel: { nama: "korsel", kualitas: { biasa: "Rp550.000", premium: "700.000", super: "800.000" } }
+            singapura: { nama: "Singapura", kualitas: { biasa: "Rp265.000", premium: "Rp415.000", super: "Rp765.000" } }
+        },
+        wechat: {
+            id:       { nama: "Indonesia",      kualitas: { biasa: "Rp30.000",  premium: "Rp45.000",  super: "Rp65.000"  } },
+            china:    { nama: "China",           kualitas: { biasa: "Rp75.000",  premium: "Rp110.000", super: "Rp150.000" } },
+            us:       { nama: "Amerika Serikat", kualitas: { biasa: "Rp100.000", premium: "Rp135.000", super: "Rp175.000" } },
+            jp:       { nama: "Jepang",          kualitas: { biasa: "Rp275.000", premium: "Rp350.000", super: "Rp425.000" } },
+            malaysia: { nama: "Malaysia",        kualitas: { biasa: "Rp80.000",  premium: "Rp100.000", super: "Rp135.000" } },
+            singapura:{ nama: "Singapura",       kualitas: { biasa: "Rp275.000", premium: "Rp425.000", super: "Rp800.000" } },
+            thai:     { nama: "Thailand",        kualitas: { biasa: "Rp65.000",  premium: "Rp85.000",  super: "Rp115.000" } },
+            viet:     { nama: "Vietnam",         kualitas: { biasa: "Rp55.000",  premium: "Rp70.000",  super: "Rp95.000"  } },
+            hong:     { nama: "Hongkong",        kualitas: { biasa: "Rp75.000",  premium: "Rp95.000",  super: "Rp130.000" } },
+            can:      { nama: "Canada",          kualitas: { biasa: "Rp65.000",  premium: "Rp80.000",  super: "Rp110.000" } },
+            jer:      { nama: "Jerman",          kualitas: { biasa: "Rp175.000", premium: "Rp230.000", super: "Rp310.000" } },
+            rus:      { nama: "Russia",          kualitas: { biasa: "Rp110.000", premium: "Rp140.000", super: "Rp190.000" } }
+        },
+        vkontakte: {
+            id:  { nama: "Indonesia",      kualitas: { biasa: "Rp20.000",  premium: "Rp30.000",  super: "Rp45.000"  } },
+            rus: { nama: "Russia",         kualitas: { biasa: "Rp55.000",  premium: "Rp75.000",  super: "Rp100.000" } },
+            us:  { nama: "Amerika Serikat",kualitas: { biasa: "Rp85.000",  premium: "Rp110.000", super: "Rp145.000" } },
+            ukr: { nama: "Ukraina",        kualitas: { biasa: "Rp50.000",  premium: "Rp65.000",  super: "Rp85.000"  } },
+            bel: { nama: "Belanda",        kualitas: { biasa: "Rp65.000",  premium: "Rp80.000",  super: "Rp105.000" } },
+            jer: { nama: "Jerman",         kualitas: { biasa: "Rp170.000", premium: "Rp215.000", super: "Rp290.000" } },
+            kaz: { nama: "Kazakhstan",     kualitas: { biasa: "Rp45.000",  premium: "Rp60.000",  super: "Rp80.000"  } },
+            pol: { nama: "Polandia",       kualitas: { biasa: "Rp55.000",  premium: "Rp70.000",  super: "Rp90.000"  } },
+            fra: { nama: "Prancis",        kualitas: { biasa: "Rp80.000",  premium: "Rp105.000", super: "Rp140.000" } },
+            can: { nama: "Canada",         kualitas: { biasa: "Rp65.000",  premium: "Rp80.000",  super: "Rp105.000" } }
         }
     };
 
     const rekening = {
       gopay: { nama: "IZMET", nomor: "0895335107865" },
       seabank: { nama: "IZMET", nomor: "901444670611" },
-      dana: { nama: "REPIKA", nomor: "085346808546" }
+      dana: { nama: "REPIKA", nomor: "089674332957" }
     };
 
     const kualitasDescriptions = {
       biasa: "⭐ Standar, masa aktif terbatas, cocok untuk percobaan cepat.",
       premium: "⭐⭐ Lebih stabil, masa aktif lebih lama.",
-      super: "⭐⭐⭐ Kualitas terbaik, paling stabil, masa aktif paling panjang.<br>Garansi 2 hari, kalau ke spam sebelum 2 hari ganti nomer baru 1x"
+      super: "⭐⭐⭐ Kualitas terbaik, paling stabil, masa aktif paling panjang."
     };
 
-    // Spin wheel prizes and probabilities - Updated according to requirements
-    const spinPrizes = [
-      { id: 1, name: "NOKOS Indonesia (Biasa)", color: "#FF5252", probability: 0.01 },
-      { id: 2, name: "NOKOS Jepang", color: "#E91E63", probability: 0 },
-      { id: 3, name: "NOKOS Rusia", color: "#2196F3", probability: 0 },
-      { id: 4, name: "NOKOS Kenya + Filipina", color: "#9C27B0", probability: 0 },
-      { id: 5, name: "NOKOS Telegram Premium", color: "#FF9800", probability: 0 },
-      { id: 6, name: "NOKOS WhatsApp Global", color: "#4CAF50", probability: 0 },
-      { id: 7, name: "Coba lagi, beli NOKOS baru untuk dapat bonus", color: "#607D8B", probability: 99.99 }
+    // Tab switching
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      const btns = document.querySelectorAll('.tab-btn');
+      const tabIndex = { nokos: 0, jasa: 1, akun: 2, followers: 3 };
+      if (tabIndex[tab] !== undefined) btns[tabIndex[tab]].classList.add('active');
+    }
+
+    // Pesan akun jadi via WA
+    function pesanAkun(namaAkun) {
+      const msg = encodeURIComponent(`Halo admin, saya mau beli Akun Jadi: ${namaAkun}. Apakah stok masih tersedia?`);
+      window.open(`https://wa.me/62895335107865?text=${msg}`, '_blank');
+    }
+
+    // Pesan followers via WA
+    function pesanFollowers(paket, harga) {
+      const msg = encodeURIComponent(`Halo admin, saya mau pesan Jasa Followers:\n\n📦 Paket: ${paket}\n💰 Harga: ${harga}\n\nMohon konfirmasi ketersediaan & link akun yang mau ditambah followers-nya. Terima kasih!`);
+      window.open(`https://wa.me/62895335107865?text=${msg}`, '_blank');
+    }
+
+    // ===== CUSTOM INSTAGRAM =====
+    function hitungCustomIG() {
+      const qty = parseInt(document.getElementById('ig-custom-qty').value);
+      const display = document.getElementById('ig-custom-price');
+      if (!qty || qty < 100) {
+        display.textContent = '⚠️ Minimal 100 followers';
+        display.classList.remove('has-price');
+        return;
+      }
+      // Harga per 1000: Rp 25.000 → Rp 25/follower
+      const harga = Math.ceil((qty / 1000) * 25000);
+      const fmt = harga.toLocaleString('id-ID');
+      display.innerHTML = `Estimasi: <strong>Rp ${fmt}</strong> untuk ${qty.toLocaleString('id-ID')} followers`;
+      display.classList.add('has-price');
+    }
+
+    function pesanCustomIG() {
+      const qty = parseInt(document.getElementById('ig-custom-qty').value);
+      if (!qty || qty < 100) {
+        alert('Masukkan jumlah followers minimal 100 dulu ya!');
+        return;
+      }
+      const harga = Math.ceil((qty / 1000) * 25000);
+      const fmt = harga.toLocaleString('id-ID');
+      const msg = encodeURIComponent(`Halo admin, saya mau pesan Jasa Followers Instagram Custom:\n\n📦 Jumlah: ${qty.toLocaleString('id-ID')} Followers\n💰 Estimasi Harga: Rp ${fmt}\n\nMohon konfirmasi harga final & kirim link akun Instagram-nya. Terima kasih!`);
+      window.open(`https://wa.me/62895335107865?text=${msg}`, '_blank');
+    }
+
+    document.addEventListener('input', function(e) {
+      if (e.target && e.target.id === 'ig-custom-qty') hitungCustomIG();
+    });
+    const avatarColors = ['#e91e63','#9c27b0','#3f51b5','#00bcd4','#009688','#ff5722','#607d8b','#795548'];
+    let selectedStar = 0;
+    let activeFilter = 'semua';
+    let visibleCount = 3;
+
+    // Data ulasan bawaan
+    let allReviews = [
+      { id:1, name:'Andi R.', platform:'instagram', star:5, text:'Keren banget! Order 5K followers Instagram, masuk semua dalam 3 jam. Recommended!', date:'2 hari lalu', color:'#e91e63' },
+      { id:2, name:'Siti M.', platform:'tiktok', star:5, text:'TikTok ku langsung rame setelah beli 10K followers. Admin fast respon, aman!', date:'5 hari lalu', color:'#9c27b0' },
+      { id:3, name:'Budi S.', platform:'youtube', star:4, text:'Subscribe YouTube 1K masuk semua. Prosesnya agak lama tapi hasilnya bagus.', date:'1 minggu lalu', color:'#3f51b5' },
+      { id:4, name:'Dewi A.', platform:'instagram', star:5, text:'Udah 3x order IG followers di sini, selalu puas. Kualitas bagus ga mudah drop.', date:'1 minggu lalu', color:'#009688' },
+      { id:5, name:'Riko F.', platform:'facebook', star:5, text:'Like page Facebook langsung naik drastis. Harga murah, proses cepat!', date:'2 minggu lalu', color:'#ff5722' },
+      { id:6, name:'Nina K.', platform:'tiktok', star:4, text:'Followers TikTok masuk tapi ada sedikit yang drop setelah seminggu. Masih oke lah.', date:'2 minggu lalu', color:'#00bcd4' },
+      { id:7, name:'Fajar D.', platform:'instagram', star:5, text:'Top banget, followers IG nya real2 ada foto dan postingannya. Gas order lagi!', date:'3 minggu lalu', color:'#795548' },
     ];
 
-    // Device ID management
-    let deviceId = localStorage.getItem('deviceId');
-    if (!deviceId) {
-      deviceId = generateDeviceId();
-      localStorage.setItem('deviceId', deviceId);
+    function renderStars(n, size) {
+      let s = '';
+      for(let i=1;i<=5;i++) s += `<span class="star${i>n?' empty':''}" style="font-size:${size||13}px;">★</span>`;
+      return s;
     }
 
-    // Call initialize when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      setupInputValidation();
-      createSpinWheel();
-      checkSpinEligibility();
-    });
-
-    function generateDeviceId() {
-      return 'd-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now().toString(36);
+    function platformLabel(p) {
+      const map = { instagram:'IG', tiktok:'TK', youtube:'YT', facebook:'FB' };
+      const col = { instagram:'#e1306c', tiktok:'#fff', youtube:'#ff0000', facebook:'#1877f2' };
+      const bg  = { instagram:'rgba(225,48,108,0.15)', tiktok:'rgba(255,255,255,0.1)', youtube:'rgba(255,0,0,0.15)', facebook:'rgba(24,119,242,0.15)' };
+      return `<span class="review-platform-tag" style="background:${bg[p]||'#333'};color:${col[p]||'#fff'}">${map[p]||p.toUpperCase()}</span>`;
     }
 
-    function createSpinWheel() {
-      const wheel = document.getElementById('spinWheel');
-      wheel.innerHTML = '';
-      
-      const sectionAngle = 360 / spinPrizes.length;
-      
-      spinPrizes.forEach((prize, index) => {
-        const section = document.createElement('div');
-        section.className = 'spin-section';
-        section.style.transform = `rotate(${index * sectionAngle}deg)`;
-        section.style.backgroundColor = prize.color;
-        
-        const span = document.createElement('span');
-        span.textContent = prize.name;
-        section.appendChild(span);
-        
-        wheel.appendChild(section);
+    function renderReviews() {
+      const list = document.getElementById('reviewList');
+      const btn  = document.getElementById('showMoreBtn');
+      if(!list) return;
+      const filtered = activeFilter==='semua' ? allReviews : allReviews.filter(r=>r.platform===activeFilter);
+      const shown = filtered.slice(0, visibleCount);
+      list.innerHTML = shown.map(r=>`
+        <div class="review-item">
+          <div class="review-item-header">
+            <div class="review-user-info">
+              <div class="review-avatar" style="background:${r.color}">${r.name.charAt(0)}</div>
+              <div>
+                <div class="review-username">${r.name} ${platformLabel(r.platform)}</div>
+                <div class="review-stars-row">${renderStars(r.star,12)}</div>
+              </div>
+            </div>
+            <div class="review-date">${r.date}</div>
+          </div>
+          <div class="review-text">${r.text}</div>
+        </div>`).join('');
+      btn.style.display = filtered.length > visibleCount ? 'block' : 'none';
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const src = activeFilter==='semua' ? allReviews : allReviews.filter(r=>r.platform===activeFilter);
+      if(!src.length) return;
+      const avg = (src.reduce((a,r)=>a+r.star,0)/src.length).toFixed(1);
+      document.getElementById('avgScore').textContent = avg;
+      document.getElementById('avgStars').innerHTML = renderStars(Math.round(avg),14);
+      document.getElementById('reviewCount').textContent = `dari ${src.length} ulasan`;
+      const bars = document.getElementById('ratingBars');
+      if(bars) {
+        bars.innerHTML = [5,4,3,2,1].map(s=>{
+          const cnt = src.filter(r=>r.star===s).length;
+          const pct = src.length ? Math.round(cnt/src.length*100) : 0;
+          return `<div class="review-bar-row"><span style="min-width:10px">${s}</span><div class="review-bar-track"><div class="review-bar-fill" style="width:${pct}%"></div></div><span style="min-width:22px;text-align:right">${cnt}</span></div>`;
+        }).join('');
+      }
+    }
+
+    function filterReviews(platform, btn) {
+      activeFilter = platform;
+      visibleCount = 3;
+      document.querySelectorAll('.review-tab-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderReviews();
+    }
+
+    function tampilkanLebihBanyak() {
+      visibleCount += 3;
+      renderReviews();
+    }
+
+    function pilihBintang(n) {
+      selectedStar = n;
+      document.querySelectorAll('.star-pick').forEach(s=>{
+        s.classList.toggle('selected', parseInt(s.dataset.val) <= n);
       });
     }
 
-    function checkSpinEligibility() {
-      const provider = document.getElementById('provider').value;
-      const negara = document.getElementById('negara').value;
-      const kualitas = document.getElementById('kualitas').value;
-      const spinContainer = document.getElementById('spinContainer');
-      const spinBtn = document.getElementById('spinBtn');
-      
-      // Check if eligible for spin (super quality and not Indonesia, Philippines, or Kenya)
-      const isEligible = kualitas === 'super' && 
-                         negara && 
-                         !['id', 'fil', 'ken'].includes(negara) && 
-                         provider;
-      
-      if (isEligible) {
-        spinContainer.style.display = 'block';
-        spinBtn.disabled = localStorage.getItem('spinUsed') === 'true';
-        
-        // Scroll to spin container
-        setTimeout(() => {
-          spinContainer.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-      } else {
-        spinContainer.style.display = 'none';
+    function kirimUlasan() {
+      const name = document.getElementById('reviewName').value.trim();
+      const platform = document.getElementById('reviewPlatform').value;
+      const text = document.getElementById('reviewText').value.trim();
+      const successEl = document.getElementById('reviewSuccess');
+      if(!name||!platform||!text||!selectedStar) {
+        alert('Lengkapi nama, platform, bintang, dan isi ulasan ya!');
+        return;
       }
+      const colors = avatarColors;
+      allReviews.unshift({
+        id: Date.now(),
+        name, platform, star: selectedStar, text,
+        date: 'Baru saja',
+        color: colors[Math.floor(Math.random()*colors.length)]
+      });
+      visibleCount = 3;
+      activeFilter = 'semua';
+      document.querySelectorAll('.review-tab-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+      renderReviews();
+      document.getElementById('reviewName').value='';
+      document.getElementById('reviewPlatform').value='';
+      document.getElementById('reviewText').value='';
+      selectedStar=0;
+      document.querySelectorAll('.star-pick').forEach(s=>s.classList.remove('selected'));
+      successEl.style.display='block';
+      setTimeout(()=>{ successEl.style.display='none'; },3000);
     }
 
-    function showSpinLogin() {
-      document.getElementById('displayDeviceId').textContent = deviceId;
-      document.getElementById('spinLoginModal').style.display = 'flex';
+    // ===== DETAIL MODAL =====
+    const platformInfo = {
+      instagram: {
+        label:'Instagram', icon:'fab fa-instagram', color:'#e1306c',
+        badge_bg:'rgba(225,48,108,0.15)',
+        features: ['Followers PERMANEN — tidak drop selamanya','Followers real, ada foto & postingan','Pengiriman bertahap (natural, aman)','Tidak perlu password akun','Cocok untuk akun publik maupun bisnis','Mulai masuk dalam 1–6 jam setelah konfirmasi']
+      },
+      tiktok: {
+        label:'TikTok', icon:'fab fa-tiktok', color:'#fff',
+        badge_bg:'rgba(255,255,255,0.1)',
+        features: ['Followers aktif & terverifikasi','Pengiriman bertahap agar aman','Tidak perlu password akun','Garansi refill 7 hari','Cocok untuk personal maupun brand','Mulai masuk dalam 1–12 jam']
+      },
+      youtube: {
+        label:'YouTube', icon:'fab fa-youtube', color:'#ff0000',
+        badge_bg:'rgba(255,0,0,0.12)',
+        features: ['Subscriber aktif, bukan bot','Membantu mencapai 1.000 subscriber monetisasi','Tidak perlu password akun','Garansi refill 7 hari','Bisa untuk channel personal maupun bisnis','Mulai masuk dalam 6–24 jam']
+      },
+      facebook: {
+        label:'Facebook', icon:'fab fa-facebook-f', color:'#1877f2',
+        badge_bg:'rgba(24,119,242,0.12)',
+        features: ['Followers & like page aktif','Cocok untuk halaman bisnis & personal','Tidak perlu password akun','Garansi refill 7 hari','Meningkatkan kredibilitas halaman','Mulai masuk dalam 1–12 jam']
+      }
+    };
+
+    function lihatDetail(platform, qty, harga) {
+      const info = platformInfo[platform];
+      if(!info) return;
+      const jenis = platform==='youtube' ? 'Subscribers' : 'Followers';
+      const waMsg = encodeURIComponent(`Halo admin, saya mau pesan Jasa Followers:\n\n📦 Paket: ${info.label} ${qty} ${jenis}\n💰 Harga: ${harga}\n\nMohon konfirmasi & kirim link akun untuk diproses. Terima kasih!`);
+      document.getElementById('detailContent').innerHTML = `
+        <div class="detail-platform-badge" style="background:${info.badge_bg}">
+          <i class="${info.icon}" style="color:${info.color};font-size:18px;"></i>
+          <span style="color:${info.color}">${info.label}</span>
+        </div>
+        <div class="detail-title">${qty} ${jenis}</div>
+        <div class="detail-subtitle">Paket Jasa Followers ${info.label}</div>
+        <div class="detail-price-highlight">${harga}</div>
+        <ul class="detail-features-list">
+          ${info.features.map(f=>`<li><span style="color:#00e676;font-size:16px;">✓</span> ${f}</li>`).join('')}
+        </ul>
+        <a href="https://wa.me/62895335107865?text=${waMsg}" target="_blank" class="detail-order-btn-full">
+          <i class="fab fa-whatsapp" style="font-size:18px;"></i> Pesan Sekarang
+        </a>`;
+      document.getElementById('detailModal').classList.add('show');
+      document.body.style.overflow='hidden';
     }
 
-    function verifySpinLogin() {
-      const input = document.getElementById('spinLoginInput').value.trim();
-      
-      if (input === deviceId) {
-        document.getElementById('spinLoginModal').style.display = 'none';
-        document.getElementById('spinBtn').disabled = false;
-      } else {
-        alert('Device ID tidak valid. Silakan masukkan ID yang benar.');
-      }
+    function tutupDetailModal(e) {
+      if(e && e.target !== document.getElementById('detailModal')) return;
+      document.getElementById('detailModal').classList.remove('show');
+      document.body.style.overflow='';
     }
 
-    function startSpin() {
-      const btn = document.getElementById('spinBtn');
-      const wheel = document.getElementById('spinWheel');
-      const resultDiv = document.getElementById('spinResult');
-      const resultText = document.getElementById('resultText');
-      
-      btn.disabled = true;
-      resultDiv.style.display = 'none';
-      
-      // Determine the prize based on probabilities
-      const random = Math.random() * 100;
-      let cumulativeProbability = 0;
-      let selectedPrize = null;
-      
-      for (const prize of spinPrizes) {
-        cumulativeProbability += prize.probability;
-        if (random <= cumulativeProbability) {
-          selectedPrize = prize;
-          break;
-        }
-      }
-      
-      // Only allow "NOKOS Indonesia (Biasa)" or "Coba lagi" to be won
-      if (selectedPrize.id !== 1 && selectedPrize.id !== 7) {
-        selectedPrize = spinPrizes.find(p => p.id === 7); // Default to "Coba lagi"
-      }
-      
-      // Calculate rotation (5 full rotations + prize angle)
-      const sectionAngle = 360 / spinPrizes.length;
-      const prizeIndex = spinPrizes.findIndex(p => p.id === selectedPrize.id);
-      const targetAngle = 5 * 360 + (360 - (prizeIndex * sectionAngle + sectionAngle/2));
-      
-      // Apply rotation
-      wheel.style.transform = `rotate(${targetAngle}deg)`;
-      
-      // Show result after spin completes
-      setTimeout(() => {
-        resultText.innerHTML = `Anda mendapatkan: <strong>${selectedPrize.name}</strong>`;
-        resultDiv.style.display = 'block';
-        
-        // Save that user has used their spin
-        localStorage.setItem('spinUsed', 'true');
-      }, 4000);
-    }
+    // Init ulasan saat halaman load
+    document.addEventListener('DOMContentLoaded', function() {
+      setupInputValidation();
+      renderReviews();
+    });
 
     function showLoading(show) {
       const spinner = document.getElementById('spinner');
@@ -1239,21 +2358,57 @@
       }
       
       tampilkanKeteranganKualitas();
-      checkSpinEligibility();
       validateKualitas();
     }
 
     function tampilkanKeteranganKualitas() {
       const kualitas = document.getElementById("kualitas").value;
+      const negara = document.getElementById("negara").value;
       const ketBox = document.getElementById("keterangan-kualitas");
       const ketText = document.getElementById("keterangan-text");
       
       if (kualitas && kualitasDescriptions[kualitas]) {
-        ketText.innerHTML = kualitasDescriptions[kualitas];
+        let description = kualitasDescriptions[kualitas];
+        const excludedCountries = ['id', 'fil', 'ken'];
+
+        if (kualitas === 'super') {
+            if (negara && !excludedCountries.includes(negara)) {
+                description += "<br>Garansi 2 hari, kalau ke spam sebelum 2 hari ganti nomer baru 1x";
+                description += '<br><br><strong>Bonus:</strong> Setiap pembelian nokos kualitas super bisa claim bonus free nokos, untuk claim chat admin,dan isi form nya';
+            }
+        }
+
+        ketText.innerHTML = description;
         ketBox.classList.add("show");
       } else {
         ketBox.classList.remove("show");
       }
+    }
+
+    function generateOrderId() {
+      const now = new Date();
+      const tgl = now.toISOString().slice(0,10).replace(/-/g,'');
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      return `NOKOS-${tgl}-${rand}`;
+    }
+
+    function formatTimestamp() {
+      const now = new Date();
+      return now.toLocaleString('id-ID', {
+        day: '2-digit', month: 'long', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      }) + ' WIB';
+    }
+
+    function salinRekening(nomor, btnEl) {
+      navigator.clipboard.writeText(nomor).then(() => {
+        btnEl.textContent = '✓ Tersalin!';
+        btnEl.classList.add('copied');
+        setTimeout(() => {
+          btnEl.textContent = 'Salin';
+          btnEl.classList.remove('copied');
+        }, 2000);
+      });
     }
 
     function bayar() {
@@ -1268,31 +2423,134 @@
       const harga = data.kualitas[kualitas];
       const kualitasNama = kualitas.charAt(0).toUpperCase() + kualitas.slice(1);
       const providerNama = provider.charAt(0).toUpperCase() + provider.slice(1);
-      const adminWa = "6285647271487";
+      const adminWa = "62895335107865";
       const rek = rekening[pembayaran];
+      const orderId = generateOrderId();
+      const timestamp = formatTimestamp();
 
-      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}`.trim();
+      let waPesan = `Halo admin, saya telah melakukan transfer pembelian NOKOS.\n\n📋 No. Order: *${orderId}*\n\nBerikut datanya:\n- Nama: ${nama}\n- Provider: ${providerNama}\n- Negara: ${data.nama}\n- Kualitas: ${kualitasNama}\n- Nomor Rekening Saya: ${nomor}\n- Metode Pembayaran: ${pembayaran.toUpperCase()}\n- Harga: ${harga}\n- Waktu Order: ${timestamp}`.trim();
 
       document.getElementById("ringkasan").innerHTML = `
-        <p><strong>✅ Detail Transaksi:</strong></p>
-        <p>👤 ${nama}<br>Provider: ${providerNama}<br>🌍 ${data.nama}<br>📶 ${kualitasNama}<br>💰 ${harga}<br>🏦 Rekening Anda: ${nomor}<br>💳 ${pembayaran.toUpperCase()}</p>
-        <p>🏦 Silakan transfer ke rekening berikut:</p>
-        <p><strong>${pembayaran.toUpperCase()} - a.n. ${rek.nama}<br>Nomor: ${rek.nomor}</strong></p>
-        <p>📩 Setelah transfer, klik tombol berikut untuk kirim ke Admin via WhatsApp:</p>
-        <a href="https://wa.me/${adminWa}?text=${encodeURIComponent(waPesan)}" target="_blank" class="sosmed-btn wa" style="width:100%;text-align:center;">
-          <i class="fab fa-whatsapp"></i> Kirim ke Admin
-        </a>
+        <div class="bukti-wrap">
+          <div class="bukti-card" id="buktiCard">
+            <div class="bukti-header">
+              <div class="bukti-header-left">
+                <div class="bukti-brand">SAPUTRA NOKOS</div>
+                <div class="bukti-sub">Bukti Pemesanan Otomatis</div>
+              </div>
+              <div class="bukti-header-right">
+                <div class="bukti-status">✓ MENUNGGU BAYAR</div>
+                <div class="bukti-order-id">${orderId}</div>
+              </div>
+            </div>
+
+            <div class="bukti-body">
+              <div class="bukti-row">
+                <span class="bukti-label">Nama</span>
+                <span class="bukti-value">${nama}</span>
+              </div>
+              <div class="bukti-row">
+                <span class="bukti-label">Provider</span>
+                <span class="bukti-value">${providerNama}</span>
+              </div>
+              <div class="bukti-row">
+                <span class="bukti-label">Negara</span>
+                <span class="bukti-value">${data.nama}</span>
+              </div>
+              <div class="bukti-row">
+                <span class="bukti-label">Kualitas</span>
+                <span class="bukti-value">${kualitasNama}</span>
+              </div>
+              <div class="bukti-row">
+                <span class="bukti-label">Metode Bayar</span>
+                <span class="bukti-value">${pembayaran.toUpperCase()}</span>
+              </div>
+              <div class="bukti-row">
+                <span class="bukti-label">Rek. Pengirim</span>
+                <span class="bukti-value">${nomor}</span>
+              </div>
+              <div class="bukti-divider"></div>
+              <div class="bukti-row">
+                <span class="bukti-label">Total Bayar</span>
+                <span class="bukti-value highlight">${harga}</span>
+              </div>
+
+              <div class="bukti-tujuan">
+                <div class="bukti-tujuan-title">🏦 Transfer ke Rekening Berikut</div>
+                <div class="bukti-tujuan-row">
+                  <span style="color:#aaa">${pembayaran.toUpperCase()} — a.n. ${rek.nama}</span>
+                </div>
+                <div class="bukti-tujuan-row" style="align-items:center;margin-top:6px;">
+                  <span class="rek-num">${rek.nomor}</span>
+                  <button class="copy-btn" onclick="salinRekening('${rek.nomor}', this)">Salin</button>
+                </div>
+              </div>
+
+              <div class="bukti-note">
+                ⚠️ Pastikan nominal transfer sesuai. Setelah transfer, kirim konfirmasi ke admin via WhatsApp di bawah.
+              </div>
+            </div>
+
+            <div class="bukti-footer">
+              <div class="bukti-timestamp">🕐 ${timestamp}</div>
+              <a href="https://wa.me/${adminWa}?text=${encodeURIComponent(waPesan)}" target="_blank" class="btn-wa-konfirm">
+                <i class="fab fa-whatsapp"></i> Konfirmasi Pembayaran ke Admin
+              </a>
+              <button class="btn-screenshot" onclick="screenshotBukti()">
+                <i class="fas fa-download"></i> Simpan Bukti Order
+              </button>
+            </div>
+          </div>
+        </div>
       `;
       document.getElementById("ringkasan").style.display = "block";
-      
       document.getElementById("ringkasan").scrollIntoView({ behavior: 'smooth' });
-      
-      // Show spin login if eligible
-      const isEligibleForSpin = kualitas === 'super' && !['id', 'fil', 'ken'].includes(negara);
-      if (isEligibleForSpin && !localStorage.getItem('spinUsed')) {
-        setTimeout(() => {
-          showSpinLogin();
-        }, 1000);
+    }
+
+    function screenshotBukti() {
+      const card = document.getElementById('buktiCard');
+      if (!card) return;
+
+      // Gunakan html2canvas jika tersedia, fallback ke print
+      if (typeof html2canvas !== 'undefined') {
+        html2canvas(card, { backgroundColor: '#1a1a3e', scale: 2 }).then(canvas => {
+          const link = document.createElement('a');
+          link.download = `bukti-order-${Date.now()}.png`;
+          link.href = canvas.toDataURL();
+          link.click();
+        });
+      } else {
+        // Fallback: buka print dialog (simpan sebagai PDF)
+        const konten = card.outerHTML;
+        const win = window.open('', '_blank');
+        win.document.write(`
+          <!DOCTYPE html><html><head>
+          <meta charset="UTF-8">
+          <title>Bukti Order NOKOS</title>
+          <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+          <style>
+            body { background:#0f0c29; font-family:'Urbanist',sans-serif; color:#fff; padding:20px; }
+            .bukti-card { background:linear-gradient(145deg,#1a1a3e,#16213e); border-radius:18px; overflow:hidden; border:1px solid rgba(0,229,255,0.2); max-width:420px; margin:auto; }
+            .bukti-header { background:linear-gradient(135deg,#00b4d8,#0077b6); padding:16px 20px; display:flex; justify-content:space-between; align-items:center; }
+            .bukti-brand { font-size:16px; font-weight:bold; color:#fff; letter-spacing:1px; }
+            .bukti-sub { font-size:11px; color:rgba(255,255,255,0.75); margin-top:2px; }
+            .bukti-status { background:#00e676; color:#000; font-size:11px; font-weight:bold; padding:3px 10px; border-radius:20px; }
+            .bukti-order-id { font-size:11px; color:rgba(255,255,255,0.75); margin-top:4px; text-align:right; }
+            .bukti-body { padding:18px 20px; }
+            .bukti-row { display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:13px; }
+            .bukti-label { color:#aaa; min-width:110px; }
+            .bukti-value { color:#fff; font-weight:600; text-align:right; }
+            .bukti-value.highlight { color:#00e676; font-size:15px; }
+            .bukti-divider { height:1px; background:linear-gradient(90deg,transparent,rgba(0,229,255,0.3),transparent); margin:4px 0; }
+            .bukti-tujuan { background:rgba(0,229,255,0.06); border:1px solid rgba(0,229,255,0.15); border-radius:10px; padding:12px 14px; margin:12px 0; }
+            .bukti-tujuan-title { font-size:11px; color:#00e5ff; font-weight:bold; text-transform:uppercase; margin-bottom:8px; }
+            .rek-num { font-size:16px; font-weight:bold; color:#fff; letter-spacing:1px; }
+            .bukti-footer { padding:14px 20px; background:rgba(0,0,0,0.2); text-align:center; font-size:11px; color:#666; }
+            .copy-btn,.btn-wa-konfirm,.btn-screenshot { display:none; }
+          </style>
+          </head><body>${konten}<script>window.onload=()=>window.print()<\/script></body></html>
+        `);
+        win.document.close();
       }
     }
 
